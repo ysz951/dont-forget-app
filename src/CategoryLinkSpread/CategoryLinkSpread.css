@@ -1,0 +1,19 @@
+.CategorylinkSpread{
+    list-style: none;
+}
+
+.CategorylinkSpread .selected{
+    color: rgb(110, 110, 110);
+}
+.CategorylinkSpread a:hover{
+    color: rgb(110, 110, 110);
+}
+.CategorylinkSpread li{
+    margin: 0;
+    margin-right: 20px;
+}
+
+.CategorylinkSpread a{
+    text-decoration: none;
+}
+

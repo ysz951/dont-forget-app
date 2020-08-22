@@ -1,0 +1,48 @@
+.Header__name{
+    /* height: 5vh; */
+    width: 90%;
+    margin:0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom:10px;
+}
+
+.Header__name h1 {
+    margin: 0;
+}
+
+.Header__name a {
+    text-decoration: none;
+}
+
+.Header__name a {
+    color: #444;
+}
+
+.Header__log_part a {
+    color: rgb(114, 88, 88);
+    font-size: smaller;
+}
+
+.Header__log_part a:hover {
+    color: rgb(138, 128, 128)
+}
+
+.Header__log_part a:last-child{
+    margin-left: 5px;
+    display: inline-block;
+    text-align: right;
+}
+
+
+@media screen and (min-width: 400px) {
+    .Header__log_part a {
+        font-size: initial;
+    }
+    .Header__log_part a:last-child{
+        margin-left: 15px;
+    }
+  }

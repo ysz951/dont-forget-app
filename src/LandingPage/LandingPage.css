@@ -1,0 +1,77 @@
+.LandingPage_image_group {
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    height: 100vh;
+    top: 10vh;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+    
+}
+
+.LandingPage_image{
+    max-width: 900px;
+    margin: 0 auto;
+    opacity: 0.5;
+    height: 80vh;
+    background: url("https://enjoycook-upload.s3.us-east-2.amazonaws.com/enjoycook-landingPage.jpg");
+    background-size: cover;
+    background-position: 30% 50%;
+}
+
+.LandingPage_welcome{
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.LandingPage_text_group{
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    top: 25vh;
+    height: 100vh;
+    /* top: 5vh; */
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.LandingPage_text_group h1{
+    /* opacity: 1; */
+    margin-top: 0;
+    margin-bottom: 10vh;
+    text-align: center;
+}
+
+
+.LandingPage_feature{
+    text-align: center;
+    margin: 5vh;
+    
+}
+
+.LandingPage_feature_last{
+    text-align: center;
+    margin-bottom: 10vh;
+    
+}
+
+.LandingPage_findMore{
+    /* margin:0 auto; */
+    text-align: center;
+}
+
+.LandingPage_findMore a{
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(230, 196, 173);
+    transition: 0.5s ease-out;
+}
+
+.LandingPage_findMore a:hover{
+    color: rgb(230, 196, 173);
+    background-color: #222;
+}

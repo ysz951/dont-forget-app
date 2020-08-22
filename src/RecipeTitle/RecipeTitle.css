@@ -1,0 +1,18 @@
+.RecipePage_title_collect_group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.RecipePage_title{
+    max-width: 90%;
+    overflow-wrap: break-word;
+}
+
+.RecipePage_collect_btn{
+    outline: none;
+    border: none;
+    background: none;
+    padding: 10px;
+    padding-right: 0;
+    font-size: large;
+}

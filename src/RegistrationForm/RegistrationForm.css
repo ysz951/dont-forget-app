@@ -1,0 +1,10 @@
+.RegistrationForm input {
+    display: flex;
+    margin: 10px 0;
+    width: 100%;
+    height: 30px;
+}
+
+.Required{
+    margin-left: 10px;
+}

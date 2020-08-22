@@ -1,0 +1,56 @@
+.RecipeListItem_group{
+    margin:0 10px 10px 10px;
+}
+
+.RecipeListItem_link {
+    text-decoration: none;
+   
+}
+
+.RecipeListItem_collect_btn{
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding:10px;
+    padding-right:0;
+    outline: none;
+}
+.RecipeListItem_image {
+    opacity: 1; 
+    
+    height: 300px;
+    width: 300px;
+    border-radius: 10px 10px 0 0;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.RecipeListItem_name {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: x-large;
+}
+.RecipeListItem_name_favorite_group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.RecipeListItem_autho_commentNum_group{
+    display: flex;
+    justify-content: space-between;
+}
+.RecipeListItem_autho_commentNum_group p{
+    margin: 10px 0;
+}
+
+.RecipeListItem_content {
+    margin: 0;
+
+}
+
+
+
+
