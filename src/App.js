@@ -7,24 +7,14 @@ import BuyItemList from './BuyItemList/BuyItemList';
 import ShoppingPage from './ShoppingPage/ShoppingPage';
 import NextListsPage from './NextListsPage/NextListsPage';
 import LandingPage from './LandingPage/LandingPage';
-
 import './App.css';
 class App extends Component {
   render(){
     return (
       <div className='App'>
-        <header className='App__header'>
-          <Switch>
-            <Route
-              exact
-              path={'/'}
-              component={BlankPage}
-            />
-            <Route 
-              component={Header}
-            />
-          </Switch>
-        </header>
+        {/* <header className='App__header'>
+            <Header/>
+        </header> */}
         <main className='App__main'>
           <Switch>
             <Route 
@@ -48,6 +38,18 @@ class App extends Component {
                 <BuyItemList
                   listId={routerProps.match.params.listId} 
                   history={routerProps.history}
+                  select="Now"
+                  key = {routerProps.match.params.listId}
+                />
+              }
+            />
+            <Route
+              path='/nextList/:listId'
+              render={(routerProps) => 
+                <BuyItemList
+                  listId={routerProps.match.params.listId} 
+                  history={routerProps.history}
+                  select="Next"
                   key = {routerProps.match.params.listId}
                 />
               }

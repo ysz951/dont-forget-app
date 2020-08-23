@@ -10,37 +10,14 @@ function LandingPage(props){
             <div className="LandingPage_text_group">
                 
                 <h1>
-                    <span className="LandingPage_welcome Lustria">
-                        <span className="red">
-                            We
-                        </span>
-                        <span className="brown">
-                            lco
-                        </span>
-                        <span className="orange">
-                            me
-                        </span>
+                    <span className="Lustria">
+                        Dont forget what you want !
                     </span>
                 </h1>
                 
-                <p className="LandingPage_feature bold black Libre larger">
-                    <span className="italic">
-                        Search{' '}
-                    </span>
-                        the recipe you want
-                </p>
-                <p className="LandingPage_feature bold black Libre x-large" >
-                    <span className="italic">
-                        Collect{' '}
-                    </span>
-                        the recipe you like
-                </p>
-                <p className="LandingPage_feature_last bold black Libre x-large">
-                    <span className="italic">
-                        Share{' '}
-                    </span>
-                        the experience you have
-                </p>
+                <p>Build a Buy List</p>
+                <p>Check the items of list during shopping</p>
+                <p>Add the out of store items in Next Time List</p>
                 <p className="LandingPage_findMore Fredoka">
                     <Link to='/buyList'>
                         Find More

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
 import { Link } from 'react-router-dom';
-import './BuyItemList.css'
+import './BuyItemList.css';
+import ListNav from '../ListNav/ListNav';
 export default class BuyItemList extends Component {
   static contextType = BuyListsContext;
   renderItems(ListItems) {
@@ -14,7 +15,7 @@ export default class BuyItemList extends Component {
     )
   }
   componentDidMount(){
-        console.log('ok');
+        // console.log('ok');
         const {listId} = this.props;
         const { items, itemToList } = this.context;
         const ListItems = [];
@@ -30,17 +31,22 @@ export default class BuyItemList extends Component {
   render() {
     const {buyLists} = this.context;
     const {listId} = this.props;
+    // console.log(listId)
+    const { select ='' } = this.props;
     const ListInd = buyLists.findIndex(list => list.id === Number(listId));
     const ListName = buyLists[ListInd].name;
     const ListItems = this.context.selectedBuyList || [];
     return (
-        <div>
-            <h2>{ListName}</h2>
-            <ul className="Buy__ListItems">
-                {this.renderItems(ListItems)}
-            </ul>
-            <p className="Buy__shoppingLink"><Link to={`/shopping/${listId}`}>Go Shopping</Link></p>
-        </div>
+        <>
+            <ListNav select={select}/>
+            <div>
+                <h2>{ListName}</h2>
+                <ul className="Buy__ListItems">
+                    {this.renderItems(ListItems)}
+                </ul>
+                <p className="Buy__shoppingLink"><Link to={`/shopping/${listId}`}>Go Shopping</Link></p>
+            </div>
+        </>
     );
   }
 }

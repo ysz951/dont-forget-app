@@ -1,0 +1,19 @@
+.ListNav{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-evenly; */
+}
+
+.ListNav li{
+    flex: 1;
+}
+
+.ListNav h2{
+    text-align: center;
+}
+
+.Seleted_Nav{
+    background-color: red;
+}

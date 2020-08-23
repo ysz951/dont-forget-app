@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
-
-import BuyList from '../BuyList/BuyList';
+import ListNav from '../ListNav/ListNav';
+import { Link } from 'react-router-dom';
+// import BuyList from '../BuyList/BuyList';
 // import './RecipeListPage.css';
 export default class CurListsPage extends Component {
   static contextType = BuyListsContext;
@@ -16,9 +17,11 @@ export default class CurListsPage extends Component {
 
   render() {
     const { buyLists } = this.context;
+    // console.log(this.props)
     // console.log(buyLists.filter(buyList => buyList.type ==='Now'))
     return (
       <>
+        <ListNav select='Now'/>
         <section>
           <ul className="Buy__Lists">
             {this.renderLists(buyLists)}
@@ -27,4 +30,14 @@ export default class CurListsPage extends Component {
       </>
     );
   }
+}
+
+function BuyList({buyList}){
+  return (
+    <p>
+        <Link to={`/buyList/${buyList.id}`}>
+            {buyList.name}
+        </Link>
+    </p>
+  )
 }

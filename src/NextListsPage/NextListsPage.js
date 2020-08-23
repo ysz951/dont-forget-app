@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
-
-import BuyList from '../BuyList/BuyList';
+import ListNav from '../ListNav/ListNav';
+import { Link } from 'react-router-dom';
+// import BuyList from '../BuyList/BuyList';
 // import './RecipeListPage.css';
 export default class NextListsPage extends Component {
   static contextType = BuyListsContext;
@@ -18,6 +19,7 @@ export default class NextListsPage extends Component {
     const { buyLists } = this.context;
     return (
       <>
+        <ListNav select="Next"/>
         <section>
           <ul className="Buy__Lists">
             {this.renderLists(buyLists)}
@@ -26,4 +28,14 @@ export default class NextListsPage extends Component {
       </>
     );
   }
+}
+
+function BuyList({buyList}){
+  return (
+    <p>
+        <Link to={`/nextList/${buyList.id}`}>
+            {buyList.name}
+        </Link>
+    </p>
+  )
 }
