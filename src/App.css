@@ -7,13 +7,13 @@
   min-height: 100vh;
 }
 
-.App__header {
+/* .App__header {
   width: 100%;
   max-width: 900px;
   top: 0;
   position: fixed;
   background-color: white;
-}
+} */
 
 .App__main {
   width: 100%;

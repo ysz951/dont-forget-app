@@ -42,7 +42,7 @@ function LandingPage(props){
                         the experience you have
                 </p>
                 <p className="LandingPage_findMore Fredoka">
-                    <Link to='/login'>
+                    <Link to='/buyList'>
                         Find More
                     </Link>
                 </p>

@@ -1,0 +1,19 @@
+.Buy__ListItems{
+    list-style: none;
+    padding-left: 0;
+}
+
+.Buy__ListItems li{
+    text-align: center;
+}
+.Buy__shoppingLink{
+    text-align: center;
+
+}
+.Buy_List_item p {
+    margin: 0;
+}
+
+.Buy_List_item {
+    margin: 10px 0;
+}

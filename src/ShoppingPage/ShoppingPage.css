@@ -1,0 +1,8 @@
+.Shopping__list{
+    list-style: none;
+    padding-left: 0;
+}
+.Shopping__list li{
+    text-align: center;
+    margin: 10px 0;
+}

@@ -1,0 +1,12 @@
+.Shopping__Item{
+    display:flex;
+    /* justify-content: space-between; */
+}
+
+.Shopping__Item p{
+    margin: 0;
+}
+
+.Shopping__Item_check{
+    text-decoration: line-through;
+}
