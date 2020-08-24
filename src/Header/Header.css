@@ -8,7 +8,12 @@
     color: #444;
 }
 
-.Header_app_name{
+.Header__name {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .Header_app_name{
     display: flex;
     justify-content: space-evenly;
-}
+} */

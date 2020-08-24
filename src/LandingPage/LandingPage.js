@@ -19,7 +19,7 @@ function LandingPage(props){
                 <p>Check the items of list during shopping</p>
                 <p>Add the out of store items in Next Time List</p>
                 <p className="LandingPage_findMore Fredoka">
-                    <Link to='/buyList'>
+                    <Link to='/login'>
                         Find More
                     </Link>
                 </p>

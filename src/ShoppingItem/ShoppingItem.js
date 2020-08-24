@@ -7,14 +7,21 @@ export default class ShoppingItem extends Component {
   state = {
       checked: false
   }
+  changeCheck = (itemId) => {
+    this.setState({checked: !this.state.checked})
+    this.state.checked ? this.context.deleteCheck(itemId) : this.context.addCheck(itemId);
+  }
   render() {
     const {item} = this.props;
+    // console.log(this.context.checkSet)
     return (
         <div className="Shopping__Item">
-            <button onClick={() => this.setState({checked: !this.state.checked})}>
+            <button onClick={() => this.changeCheck(item.id)}>
                 {this.state.checked ? 'Uncheck' : 'Check'}
             </button>
-            <p className = {this.state.checked ? 'Shopping__Item_check' : 'Shopping__Item_uncheck'}>{item.name}</p>
+            <p className = {this.state.checked ? 'Shopping__Item_check' : 'Shopping__Item_uncheck'}>
+              {item.item_name}
+            </p>
             {!this.state.checked && <button>Next Time</button>}
         </div>
     );

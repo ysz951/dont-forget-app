@@ -8,10 +8,10 @@ export default function ListNav(props) {
             <li>
                 <h2> 
                 {select === 'Now' 
-                ?   <Link to='/buyList' className="Seleted_Nav">
+                ?   <Link to='/buyLists' className="Seleted_Nav">
                         Buy List
                     </Link>
-                :   <Link to='/buyList'>
+                :   <Link to='/buyLists'>
                         Buy List
                     </Link>
                 }
@@ -20,10 +20,10 @@ export default function ListNav(props) {
             <li> 
                 <h2>
                 {select === 'Next' 
-                ?   <Link to='/nextList' className="Seleted_Nav">
+                ?   <Link to='/nextLists' className="Seleted_Nav">
                         Next Time List
                     </Link>
-                :   <Link to='/nextList'>
+                :   <Link to='/nextLists'>
                         Next Time List
                     </Link>
                 }

@@ -12,7 +12,7 @@ export default class LoginPage extends Component {
 
   handleLoginSuccess = () => {
     const { location, history } = this.props;
-    const destination = (location.state || {}).from || window.localStorage.pathname || '/main';
+    const destination = (location.state || {}).from || '/buyList';
     history.push(destination);
   };
 

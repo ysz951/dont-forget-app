@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
 import ListNav from '../ListNav/ListNav';
 import { Link } from 'react-router-dom';
+import BuyListApiService from '../services/buylist-api-service';
 // import BuyList from '../BuyList/BuyList';
-// import './RecipeListPage.css';
+import './CurListsPage.css';
 export default class CurListsPage extends Component {
   static contextType = BuyListsContext;
 
+  componentDidMount() {
+    this.context.clearError();
+    BuyListApiService.getBuyLists()
+      .then(this.context.setBuyLists)
+      .catch(this.context.setError)
+  }
+
   renderLists(buyLists) {
-    return buyLists.filter(buyList => buyList.type === "Now").map(buyList => 
+    return buyLists.map(buyList => 
       <li className="Buy__list" key = {buyList.id}>
           <BuyList buyList={buyList}/>
       </li>
@@ -16,9 +24,7 @@ export default class CurListsPage extends Component {
   }
 
   render() {
-    const { buyLists } = this.context;
-    // console.log(this.props)
-    // console.log(buyLists.filter(buyList => buyList.type ==='Now'))
+    const { buyLists = [], error } = this.context;
     return (
       <>
         <ListNav select='Now'/>
@@ -27,6 +33,7 @@ export default class CurListsPage extends Component {
             {this.renderLists(buyLists)}
           </ul>
         </section>
+        <Link className = 'AddBuyList__Link' to='/addbuylist'> add a list </Link>
       </>
     );
   }
@@ -35,8 +42,8 @@ export default class CurListsPage extends Component {
 function BuyList({buyList}){
   return (
     <p>
-        <Link to={`/buyList/${buyList.id}`}>
-            {buyList.name}
+        <Link to={`/buyLists/${buyList.id}`}>
+            {buyList.list_name}
         </Link>
     </p>
   )

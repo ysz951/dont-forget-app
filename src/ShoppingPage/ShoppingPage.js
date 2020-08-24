@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
 import { Link } from 'react-router-dom';
-import ShoppingItem from '../ShoppingItem/ShoppingItem'
-import './ShoppingPage.css'
+import ShoppingItem from '../ShoppingItem/ShoppingItem';
+import BuyListApiService from '../services/buylist-api-service';
+import './ShoppingPage.css';
 export default class Shopping extends Component {
     static contextType = BuyListsContext;
     renderItems(ListItems) {
@@ -14,29 +15,34 @@ export default class Shopping extends Component {
             )
         )
     }
+    finshiShopping = () => {
+        this.props.history.push('/buyList');
+    }
     componentDidMount(){
-        // console.log('ok');
-        const {listId} = this.props;
-        const { items, itemToList } = this.context;
-        const ListItems = [];
-        items.forEach(item => {
-            itemToList.forEach(relation => {
-                if (item.id === relation.item_id && relation.list_id === Number(listId)) {
-                    ListItems.push(item);
-                }
+        const {listId} = this.props.match.params;
+        this.context.clearError();
+        BuyListApiService.getBuyListItems(listId)
+            .then(res => {
+                // this.context.setItems(res.listItems);
+                // this.setState({listName: res.listName});
+                this.context.setSelectedBuyList(res.listItems)
             })
-        });
-        this.context.setSelectedBuyList(ListItems)
+            .catch(err => this.context.setError(err.error))
     }
     render() {
         const ListItems = this.context.selectedBuyList || [];
+        const {error} = this.context;
         return (
             <div>
                 <h2>Shopping</h2>
+                {error  &&  
+                <div role='alert'>
+                    <p className='red'>{error}</p>
+                </div>}
                 <ul className="Shopping__list">
                     {this.renderItems(ListItems)}
                 </ul>
-                <Link to='/'> Finish</Link>
+                <button onClick={() => this.finshiShopping()}> Finish </button>
             </div>
         );
     }

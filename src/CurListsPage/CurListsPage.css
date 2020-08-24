@@ -1,3 +1,12 @@
 .dummy_space{
     margin-top: 100px;
 }
+
+.AddBuyList__Link {
+    position: fixed;
+    bottom: 20vh;
+    left: 5vh;
+    /* transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%); */
+}
