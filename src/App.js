@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import CurListsPage from './CurListsPage/CurListsPage';
 import BuyItemList from './BuyItemList/BuyItemList';
+import NextItemList from './NextItemList/NextItemList';
 import ShoppingPage from './ShoppingPage/ShoppingPage';
 import NextListsPage from './NextListsPage/NextListsPage';
 import PublicOnlyRoute from './Route/PublicOnlyRoute';
@@ -119,7 +120,7 @@ class App extends Component {
             <PrivateRoute
               exact
               path={'/nextLists/:listId'}
-              component={BuyItemList}
+              component={NextItemList}
               select="Next"
             />
             <PrivateRoute
