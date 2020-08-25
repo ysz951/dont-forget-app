@@ -5,7 +5,7 @@ const BuyListsContext = React.createContext({
   nextLists: [],
   items: [],
   itemToList: [],
-  selectedBuyList: null,
+  selectedBuyList: [],
   setSelectedBuyList: () => {},
   setError: () => {},
   setBuyLists: () => {},
@@ -17,7 +17,14 @@ const BuyListsContext = React.createContext({
   addItem: () => {},
   addCheck: () => {},
   deleteCheck: () => {},
+  addNext: () => {},
+  deleteNext: () => {},
+  clearCheckSet: () => {},
+  clearNextSet: () => {},
+  addNextList: () => {},
+  clearSelectedBuyList: () => {},
   checkSet: new Set(),
+  nextSet: new Set(),
   error: null,
 });
 
@@ -29,9 +36,10 @@ export class BuyListsProvider extends Component {
     nextLists: [],
     items: [],
     itemToList: [],
-    selectedBuyList: null,
+    selectedBuyList: [],
     error: null,
     checkSet: new Set(),
+    nextSet: new Set(),
   };
 
   setBuyLists = buyLists => {
@@ -46,6 +54,12 @@ export class BuyListsProvider extends Component {
       buyList
     ]);
   }
+  addNextList = nextList => {
+    this.setNextLists([
+      ...this.state.nextLists,
+      nextList
+    ]);
+  }
   addCheck = itemId => {
     const newCheckSet = this.state.checkSet;
     newCheckSet.add(itemId);
@@ -56,7 +70,22 @@ export class BuyListsProvider extends Component {
     newCheckSet.delete(itemId);
     this.setState({checkSet: newCheckSet});
   }
-
+  clearCheckSet = () => {
+    this.setState({checkSet: new Set()});
+  }
+  addNext = itemId => {
+    const newNextSet = this.state.nextSet;
+    newNextSet.add(itemId);
+    this.setState({nextSet: newNextSet});
+  }
+  deleteNext= itemId => {
+    const newNextSet = this.state.nextSet;
+    newNextSet.delete(itemId);
+    this.setState({nextSet: newNextSet});
+  }
+  clearNextSet = () => {
+    this.setState({nextSet: new Set()});
+  }
   setItems = items => {
     this.setState({items})
   }
@@ -83,7 +112,9 @@ export class BuyListsProvider extends Component {
     // console.log(listItems)
     this.setState({selectedBuyList: listItems})
   }
-
+  clearSelectedBuyList = () => {
+    this.setSelectedBuyList([]);
+  }
   render() {
     const value = {
       buyLists: this.state.buyLists,
@@ -102,8 +133,15 @@ export class BuyListsProvider extends Component {
       addItem: this.addItem,
       addCheck: this.addCheck,
       deleteCheck: this.deleteCheck,
+      addNext: this.addNext,
+      deleteNext: this.deleteNext,
+      clearCheckSet: this.clearCheckSet,
+      clearNextSet: this.clearNextSet,
+      addNextList: this.addNextList,
+      clearSelectedBuyList: this.clearSelectedBuyList,
       error: this.state.error,
       checkSet: this.state.checkSet,
+      nextSet: this.state.nextSet,
     };
     return (
       <BuyListsContext.Provider value={value}>

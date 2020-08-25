@@ -58,7 +58,7 @@ export default class BuyItemList extends Component {
                     {this.renderItems(ListItems)}
                 </ul>
                 <p className="Buy__shoppingLink">
-                    <Link to={`/shopping/${listId}`}>
+                    <Link to={`/shopping/now/${listId}`}>
                     Go Shopping
                     </Link>
                 </p>

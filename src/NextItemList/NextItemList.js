@@ -58,7 +58,7 @@ export default class NextItemList extends Component {
                     {this.renderItems(ListItems)}
                 </ul>
                 <p className="Buy__shoppingLink">
-                    <Link to={`/shopping/${listId}`}>
+                    <Link to={`/shopping/next/${listId}`}>
                     Go Shopping
                     </Link>
                 </p>

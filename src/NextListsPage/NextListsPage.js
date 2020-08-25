@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
 import ListNav from '../ListNav/ListNav';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import BuyListApiService from '../services/buylist-api-service';
 // import BuyList from '../BuyList/BuyList';
 // import './CurListsPage.css';
-export default class NextListsPage extends Component {
+class NextListsPage extends Component {
   static contextType = BuyListsContext;
 
   componentDidMount() {
     this.context.clearError();
     BuyListApiService.getNextLists()
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.context.setNextLists(res)})
       .catch(this.context.setError)
   }
@@ -27,6 +27,7 @@ export default class NextListsPage extends Component {
 
   render() {
     const { nextLists = [], error } = this.context;
+    console.log(nextLists)
     return (
       <>
         <ListNav select='Next'/>
@@ -40,7 +41,7 @@ export default class NextListsPage extends Component {
     );
   }
 }
-
+export default withRouter(NextListsPage);
 function BuyList({buyList}){
   return (
     <p>

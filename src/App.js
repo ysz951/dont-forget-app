@@ -17,6 +17,7 @@ import AuthApiService from './services/auth-api-service';
 import IdleService from './services/idle-service';
 import AddList from './AddList/AddList';
 import AddItem from './AddItem/AddItem';
+import FinishPage from './FinishPage/FinishPage';
 import './App.css';
 class App extends Component {
   state = { hasError: false }
@@ -124,9 +125,14 @@ class App extends Component {
               select="Next"
             />
             <PrivateRoute
-              path={'/shopping/:listId'}
+              path={'/shopping/now/:listId'}
               component={ShoppingPage}
-              // select="Now"
+              select="Now"
+            />
+            <PrivateRoute
+              path={'/shopping/next/:listId'}
+              component={ShoppingPage}
+              select="Next"
             />
             <PrivateRoute
               path={'/addbuylist'}
@@ -138,43 +144,10 @@ class App extends Component {
               component={AddItem}
               select="Now"
             />
-            {/* <Route
-              exact
-              path={'/nextList'}
-              component={NextListsPage}
+            <PrivateRoute
+              path={`/finish`}
+              component={FinishPage}
             />
-            <Route
-              path='/buyList/:listId'
-              render={(routerProps) => 
-                <BuyItemList
-                  listId={routerProps.match.params.listId} 
-                  history={routerProps.history}
-                  select="Now"
-                  key = {routerProps.match.params.listId}
-                />
-              }
-            />
-            <Route
-              path='/nextList/:listId'
-              render={(routerProps) => 
-                <BuyItemList
-                  listId={routerProps.match.params.listId} 
-                  history={routerProps.history}
-                  select="Next"
-                  key = {routerProps.match.params.listId}
-                />
-              }
-            />
-            <Route
-              path='/shopping/:listId'
-              render={(routerProps) => 
-                <ShoppingPage
-                  listId={routerProps.match.params.listId} 
-                  history={routerProps.history}
-                  key = {routerProps.match.params.listId}
-                />
-              }
-            /> */}
              <Route
               component={NotFoundPage}
             />  
