@@ -13,12 +13,10 @@ export default class LoginForm extends Component {
     const { user_name, password } = ev.target;
 
     AuthApiService.postLogin({
-      user_name: user_name.value,
-      password: password.value,
+      user_name: user_name ? user_name.value : "test",
+      password: password ? password.value : "password",
     })
       .then(res => {
-        user_name.value = ''
-        password.value = ''
         this.props.onLoginSuccess()
       })
       .catch(res => {
@@ -63,6 +61,10 @@ export default class LoginForm extends Component {
         </div>
         <button className="LoginFrom_submit_btn btn_type_1" type='submit'>
           Login
+        </button>
+        {' '}
+        <button className="LoginFrom_submit_btn btn_type_1" id ="demo" type='button' onClick={this.handleSubmitBasicAuth}>
+          Demo user login
         </button>
       </form>
     );

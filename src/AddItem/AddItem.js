@@ -34,10 +34,12 @@ export default class AddItem extends Component {
         // .then(this.context.addBuyList)
         .then(res => {
             item_name.value = '';
-            console.log(res)
-            this.context.addItem(res)
+            // console.log(res)
+            const temp = res;
+            
             BuyListApiService.postItemToList(res.id, listId)
                 .then(res => {
+                    this.context.addItem(temp);
                     this.props.history.goBack();
                 })
                 .catch(err => this.context.setError(err.error))
@@ -53,7 +55,7 @@ export default class AddItem extends Component {
             <ListNav select={select}/>
             {error ?
             <div role='alert'>
-                <p className='red'>{error}</p>
+                <p className='red'>error</p>
             </div>
             :
             <div className="AddItem">
