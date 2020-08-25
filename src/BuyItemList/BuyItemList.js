@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import './BuyItemList.css';
 import ListNav from '../ListNav/ListNav';
 export default class BuyItemList extends Component {
+  static defaultProps = {
+    item: {},
+  };
   static contextType = BuyListsContext;
   renderItems(ListItems) {
     return (
@@ -29,12 +32,12 @@ export default class BuyItemList extends Component {
         this.context.setSelectedBuyList(ListItems)
   }
   render() {
-    const {buyLists} = this.context;
+    const buyLists = this.context.buyLists;
     const {listId} = this.props;
     // console.log(listId)
     const { select ='' } = this.props;
     const ListInd = buyLists.findIndex(list => list.id === Number(listId));
-    const ListName = buyLists[ListInd].name;
+    const ListName = buyLists[ListInd] ? buyLists[ListInd].name : "";
     const ListItems = this.context.selectedBuyList || [];
     return (
         <>

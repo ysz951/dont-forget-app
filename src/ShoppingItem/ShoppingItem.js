@@ -3,6 +3,9 @@ import BuyListsContext from '../context/BuyListsContext';
 import { Link } from 'react-router-dom';
 import './ShoppingItem.css'
 export default class ShoppingItem extends Component {
+  static defaultProps = {
+    item: {},
+  };
   static contextType = BuyListsContext;
   state = {
       checked: false
