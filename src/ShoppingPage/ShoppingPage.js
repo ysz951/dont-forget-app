@@ -16,6 +16,7 @@ export default class Shopping extends Component {
         finishStatus: false,
         uncheckItems: [],
         showConfirm: false,
+        getAll: false,
     }
     renderItems(ListItems) {
         return (
@@ -33,13 +34,35 @@ export default class Shopping extends Component {
     finishShopping = () => {
         const ListItems = this.context.selectedBuyList || [];
         const uncheckItems = ListItems.filter(item => !this.context.checkSet.has(item.id));
-        this.setState({
-            finishStatus:true,
-            uncheckItems,
-        })
+        if (uncheckItems.length) {
+            this.setState({
+                finishStatus:true,
+                uncheckItems,
+            })
+        }
+        else{
+            this.setState({
+                getAll: true,
+            })
+            // console.log('ok')
+            setTimeout(function(){ 
+                // console.log(this.props.history)
+                this.props.history.push('/buyLists');
+             }.bind(this), 3000);
+            // setTimeout(function(){ this.props.history.push('/buyLists'); }, 3000);
+            // setTimeout(, 3000);
+        }
         // this.props.history.push('/finish');
     }
+    onUnload(event) { 
+        alert('page Refreshed')
+    }
     componentDidMount(){
+        window.addEventListener("beforeunload", this.onUnload)
+        window.onbeforeunload = function() {
+            this.onUnload();
+            return "";
+        }.bind(this);
         const {listId} = this.props.match.params;
         this.context.clearError();
         const {select} = this.props;
@@ -69,6 +92,8 @@ export default class Shopping extends Component {
         this.context.clearCheckSet();
         this.context.clearNextSet();
         this.context.clearSelectedBuyList();
+        window.removeEventListener("beforeunload", this.onUnload);
+        window.onbeforeunload = () => {};
     }
 
     renderFinish = (uncheckItems) => {
@@ -123,36 +148,42 @@ export default class Shopping extends Component {
 
         const uncheckItems = this.state.uncheckItems || [];
         // console.log(uncheckItems)
-        return (!this.state.finishStatus ? 
-                (<div>
-                    <h2>Shopping</h2>
-                    {error  &&  
-                    <div role='alert'>
-                        <p className='red'>{error}</p>
-                    </div>}
-                    {this.state.showConfirm && (
-                        <div className="Shopping__confirm">
-                            <h2>Are you sure? </h2>
-                            <div>
-                                <button onClick={() => this.setState({showConfirm:false})}>No</button>
-                                <button onClick={() => this.finishShopping()}>Yes</button>
+        return  (!this.state.getAll ? 
+                (!this.state.finishStatus ? 
+                    (<div>
+                        <h2>Shopping</h2>
+                        {error  &&  
+                        <div role='alert'>
+                            <p className='red'>{error}</p>
+                        </div>}
+                        {this.state.showConfirm && (
+                            <div className="Shopping__confirm">
+                                <h2>Are you sure? </h2>
+                                <div>
+                                    <button onClick={() => this.setState({showConfirm:false})}>No</button>
+                                    <button onClick={() => this.finishShopping()}>Yes</button>
+                                </div>
                             </div>
-                        </div>
-                    )}
-                    <ul className="Shopping__list">
-                        {this.renderItems(ListItems)}
-                    </ul>
-                    <button onClick={() => this.showConfirmFunc()}> Finish </button>
-                </div>)
+                        )}
+                        <ul className="Shopping__list">
+                            {this.renderItems(ListItems)}
+                        </ul>
+                        <button onClick={() => this.showConfirmFunc()}> Finish </button>
+                    </div>)
+                    :
+                    (<div>
+                        <ul>
+                            {this.renderFinish(uncheckItems)}
+                        </ul>
+                        <button onClick={() => this.addNext(uncheckItems)}>OK </button>
+                    </div>)
+                )
                 :
                 (<div>
-                    {/* <p>Finish</p> */}
-                    {/* <button onClick={() => this.setState({finishStatus:false})}>Back </button> */}
-                    <ul>
-                        {this.renderFinish(uncheckItems)}
-                    </ul>
-                    <button onClick={() => this.addNext(uncheckItems)}>OK </button>
-                </div>)
-           )
+                <p>Get everything</p>
+                <button onClick={() => this.addNext(uncheckItems)}>OK </button>
+                </div>
+                )
+            );
     }
 }
