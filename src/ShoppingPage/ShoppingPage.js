@@ -167,14 +167,16 @@ export default class Shopping extends Component {
                             {this.renderItems(ListItems)}
                         </ul>
                         <button onClick={() => this.showConfirmFunc()}> Finish </button>
-                    </div>)
+                    </div>
+                    )
                     :
                     (<div>
                         <ul>
                             {this.renderFinish(uncheckItems)}
                         </ul>
                         <button onClick={() => this.addNext(uncheckItems)}>OK </button>
-                    </div>)
+                    </div>
+                    )
                 )
                 :
                 (<div>
