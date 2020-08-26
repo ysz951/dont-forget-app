@@ -3,10 +3,28 @@
 }
 
 .AddBuyList__Link {
-    position: fixed;
+    /* position: fixed;
     bottom: 20vh;
-    left: 5vh;
+    left: 5vh; */
     /* transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -webkit-transform: translateX(-50%); */
+}
+
+.Buy__Lists{
+    list-style: none;
+    padding-left: 0;
+}
+
+.Buy__list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.Buy__list_name{
+    /* text-align: center; */
+    margin-left: 10px;
+    margin-right: 10px;
 }

@@ -143,19 +143,17 @@ export default class Shopping extends Component {
         const ListItems = this.context.selectedBuyList || [];
         const {error} = this.context;
      
-        // console.log('check', this.context.checkSet)
-        // console.log('next', this.context.nextSet)
 
         const uncheckItems = this.state.uncheckItems || [];
-        // console.log(uncheckItems)
-        return  (!this.state.getAll ? 
+        return  ( error ?
+                    <div role='alert'>
+                        <p className='red'>{error}</p>
+                    </div>
+                :
+                (!this.state.getAll ? 
                 (!this.state.finishStatus ? 
                     (<div>
                         <h2>Shopping</h2>
-                        {error  &&  
-                        <div role='alert'>
-                            <p className='red'>{error}</p>
-                        </div>}
                         {this.state.showConfirm && (
                             <div className="Shopping__confirm">
                                 <h2>Are you sure? </h2>
@@ -183,7 +181,7 @@ export default class Shopping extends Component {
                 <p>Get everything</p>
                 <button onClick={() => this.addNext(uncheckItems)}>OK </button>
                 </div>
-                )
-            );
+                ))
+        );
     }
 }

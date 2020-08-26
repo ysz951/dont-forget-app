@@ -8,42 +8,120 @@ export default class BuyItemList extends Component {
   static contextType = BuyListsContext;
   state = {
       listName: '',
+      textAreaActive: false,
+      selectedItemId: null,
   }
-  renderItems(ListItems) {
-    return (
-        ListItems.map(item => 
-            <li className="Buy_List_item" key = {item.id}>
-                <p>{item.item_name}</p>
-            </li>
-        )
-    )
-  }
+  
   componentDidMount(){
-        // console.log(this.props.match);
         const {listId} = this.props.match.params;
         this.context.clearError();
-        BuyListApiService.getBuyListItems(listId)
+        const { select ='' } = this.props;
+        if (select === 'Now'){
+            BuyListApiService.getBuyListItems(listId)
             .then(res => {
                 this.context.setItems(res.listItems);
                 this.setState({listName: res.listName});
                 // this.context.setSelectedBuyList(res.listItems)
             })
             .catch(err => this.context.setError(err.error))
+        }
+        else {
+            BuyListApiService.getNextListItems(listId)
+            .then(res => {
+                this.context.setItems(res.listItems);
+                this.setState({listName: res.listName});
+                // this.context.setSelectedBuyList(res.listItems)
+            })
+            .catch(err => this.context.setError(err.error))
+        }
+        
   }
   componentWillUnmount() {
     this.context.clearItems();
   }
+  renderItems(ListItems, select) {
+    return ( 
+        ListItems.map(item => 
+            <li className="Buy_List_item" key = {item.id}>
+                
+                { select === "Now" ?
+                    this.state.textAreaActive && item.id === this.state.selectedItemId ?
+                    <form
+                        className='Buy_List_item_form'
+                        onSubmit={this.submitUpdateItem}
+                    > 
+                        <textarea
+                        className='Buy_List_item_textarea'
+                        required
+                        aria-label='Type a item name...'
+                        name='updateItem'
+                        id='updateItem'
+                        defaultValue={item.item_name}
+                        rows='1'
+                        />
+                        <div className="Recipepage__comment_CommentFormButton">
+                        <button className="btn_type_2" type='button' onClick={this.closeTextArea}>
+                            Cancel
+                        </button>
+                        <button className="btn_type_3" type='submit'>
+                            Update
+                        </button>
+                        </div>
+                    </form>
+                    :
+                    <>
+                    <button onClick={() => this.deleteItem(item.id)}> Delete </button>
+                    {' '}
+                    <p>{item.item_name}</p>
+                    {' '}
+                    <button onClick={() => this.changeButtonClick(item.id)}> Edit</button>
+                    </>
+                :
+                <p>{item.item_name}</p>
+                }
+            </li>
+            
+        )
+    )
+  }
+  submitUpdateItem = ev => {
+    ev.preventDefault();
+    const {updateItem} = ev.target;
+    // console.log(this.state.selectedListId, updateList.value)
+    BuyListApiService.updateItem(this.state.selectedItemId, updateItem.value)
+      .then(res => {
+        this.context.updateItem(this.state.selectedItemId, updateItem.value)
+        this.setState({
+          textAreaActive: false,
+          selectedItemId: null,
+        })
+      })
+      .catch(this.context.setError)
+  }
+  deleteItem = (itemId) => {
+    BuyListApiService.deleteItem(itemId)
+      .then(res => {
+        this.context.deleteItem(itemId);
+      })
+      .catch(this.context.setError)
+  }
+  changeButtonClick = (itemId) => {
+    this.setState({
+      textAreaActive: true,
+      selectedItemId: itemId,
+    })
+  }
+  closeTextArea = () => {
+    this.setState({
+      textAreaActive: false,
+      selectedItemId: null,
+    });
+  }
   render() {
-    // const {buyLists} = this.context;
-    // const {listId} = this.props;
-    // console.log(listId)
     const { select ='' } = this.props;
-    // const ListInd = buyLists.findIndex(list => list.id === Number(listId));
-    // const ListName = buyLists[ListInd].name;
     const ListItems = this.context.items || [];
     const {listId} = this.props.match.params;
     const { error } = this.context;
-    // console.log(this.context.selectedBuyList)
     return (
         <>
             <ListNav select={select}/>
@@ -55,14 +133,27 @@ export default class BuyItemList extends Component {
             <div>
                 <h2>{this.state.listName}</h2>
                 <ul className="Buy__ListItems">
-                    {this.renderItems(ListItems)}
+                    {this.renderItems(ListItems, select)}
                 </ul>
+                {select === "Now" ?
                 <p className="Buy__shoppingLink">
                     <Link to={`/shopping/now/${listId}`}>
-                    Go Shopping
+                        Go Shopping
                     </Link>
                 </p>
-                <Link className = 'AddItem__Link' to={`/addBuyItem/${listId}`}> Add a item </Link>
+                :
+                <p className="Buy__shoppingLink">
+                    <Link to={`/shopping/next/${listId}`}>
+                        Go Shopping
+                    </Link>
+                </p>
+                }
+                {   
+                    select === "Now" && 
+                    <Link className = 'AddItem__Link' to={`/addBuyItem/${listId}`}> 
+                        Add a item 
+                    </Link>
+                }
             </div>
             }
         </>

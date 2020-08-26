@@ -139,39 +139,66 @@ const BuyListApiService = {
         )
     },
 
-    // deleteComment(commentId) {
-    //     return fetch(`${config.API_ENDPOINT}/comments/${commentId}`, {
-    //     method: 'DELETE',
-    //     headers: {
-    //         'content-type': 'application/json',
-    //         'authorization': `bearer ${TokenService.getAuthToken()}`,
-    //     },
-    //     })
-    //     .then(res => {
-    //         if (!res.ok) {
-    //           return res.json().then(error => Promise.reject(error))
-    //         }
-    //       })
-    // },
-    // updateComment(recipeId, content, commentId) {
-    //     return fetch(`${config.API_ENDPOINT}/comments/${commentId}`, {
-    //     method: 'PATCH',
-    //     headers: {
-    //         'content-type': 'application/json',
-    //         'authorization': `bearer ${TokenService.getAuthToken()}`,
-    //     },
-    //     body: JSON.stringify({
-    //         recipe_id: recipeId,
-    //         content,
-    //     }),
-    //     })
-    //     .then(res => {
-    //         if (!res.ok) {
-    //           return res.json().then(error => Promise.reject(error))
-    //         }
-    //       })
-    // },
-
+    deleteBuyList(listId) {
+        return fetch(`${config.API_ENDPOINT}/buylists/${listId}`, {
+        method: 'DELETE',
+        headers: {
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
+        },
+        })
+        .then(res => {
+            if (!res.ok) {
+              return res.json().then(error => Promise.reject(error))
+            }
+        })
+    },
+    updateBuyList(listId, list_name) {
+        return fetch(`${config.API_ENDPOINT}/buylists/${listId}`, {
+        method: 'PATCH',
+        headers: {
+            'content-type': 'application/json',
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
+        },
+        body: JSON.stringify({
+            list_name,
+        }),
+        })
+        .then(res => {
+            if (!res.ok) {
+              return res.json().then(error => Promise.reject(error))
+            }
+          })
+    },
+    deleteItem(itemId) {
+        return fetch(`${config.API_ENDPOINT}/items/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
+        },
+        })
+        .then(res => {
+            if (!res.ok) {
+              return res.json().then(error => Promise.reject(error))
+            }
+        })
+    },
+    updateItem(itemId, item_name) {
+        return fetch(`${config.API_ENDPOINT}/items/${itemId}`, {
+        method: 'PATCH',
+        headers: {
+            'content-type': 'application/json',
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
+        },
+        body: JSON.stringify({
+            item_name,
+        }),
+        })
+        .then(res => {
+            if (!res.ok) {
+              return res.json().then(error => Promise.reject(error))
+            }
+          })
+    },
     // getCollectionList() {
     //     return fetch(`${config.API_ENDPOINT}/users/collections`, {
     //         headers: {

@@ -9,6 +9,8 @@ const BuyListsContext = React.createContext({
   setSelectedBuyList: () => {},
   setError: () => {},
   setBuyLists: () => {},
+  deleteBuyList: () => {},
+  updateBuyList: () => {},
   setNextLists: () => {},
   clearError: () => {},
   setItems: () => {},
@@ -23,6 +25,10 @@ const BuyListsContext = React.createContext({
   clearNextSet: () => {},
   addNextList: () => {},
   clearSelectedBuyList: () => {},
+  clearBuyLists: () => {},
+  clearNextLists: () => {},
+  deleteItem: () => {},
+  updateItem: () => {},
   checkSet: new Set(),
   nextSet: new Set(),
   error: null,
@@ -43,16 +49,32 @@ export class BuyListsProvider extends Component {
   };
 
   setBuyLists = buyLists => {
-    this.setState({buyLists})
+    this.setState({buyLists});
   }
   setNextLists = nextLists => {
-    this.setState({nextLists})
+    this.setState({nextLists});
+  }
+  clearBuyLists = () => {
+    this.setBuyLists([]);
+  }
+  clearNextLists = () => {
+    this.setNextLists([]);
   }
   addBuyList = buyList => {
     this.setBuyLists([
       ...this.state.buyLists,
       buyList
     ]);
+  }
+  deleteBuyList = listId => {
+    const newBuyLists = this.state.buyLists.filter(list => Number(list.id) !== Number(listId));
+    this.setBuyLists(newBuyLists);
+  }
+  updateBuyList = (listId, list_name) => {
+    const newBuyLists = this.state.buyLists;
+    const index = newBuyLists.findIndex(list => list.id === listId);
+    newBuyLists[index].list_name = list_name;
+    this.setBuyLists(newBuyLists);
   }
   addNextList = nextList => {
     this.setNextLists([
@@ -78,28 +100,38 @@ export class BuyListsProvider extends Component {
     newNextSet.add(itemId);
     this.setState({nextSet: newNextSet});
   }
-  deleteNext= itemId => {
+  deleteNext = itemId => {
     const newNextSet = this.state.nextSet;
     newNextSet.delete(itemId);
     this.setState({nextSet: newNextSet});
   }
+  
   clearNextSet = () => {
     this.setState({nextSet: new Set()});
   }
   setItems = items => {
-    this.setState({items})
+    this.setState({items});
   }
 
   addItem = item => {
     this.setItems([
       ...this.state.items,
       item
-    ])
+    ]);
   }
-
+  deleteItem = itemId => {
+    const newItems = this.state.items.filter(item => Number(item.id) !== Number(itemId));
+    this.setItems(newItems);
+  }
+  updateItem = (itemId, item_name) => {
+    const newItems = this.state.items;
+    const index = newItems.findIndex(item => item.id === itemId);
+    newItems[index].item_name = item_name;
+    this.setItems(newItems);
+  }
   clearItems = () => {
-    this.setState({items: []})
-    this.setState({selectedBuyList: null})
+    this.setState({items: []});
+    this.setState({selectedBuyList: null});
   }
   setError = error => {
     console.error(error);
@@ -110,7 +142,7 @@ export class BuyListsProvider extends Component {
   }
   setSelectedBuyList = listItems => {
     // console.log(listItems)
-    this.setState({selectedBuyList: listItems})
+    this.setState({selectedBuyList: listItems});
   }
   clearSelectedBuyList = () => {
     this.setSelectedBuyList([]);
@@ -125,12 +157,16 @@ export class BuyListsProvider extends Component {
       setSelectedBuyList: this.setSelectedBuyList,
       setError: this.setError,
       setBuyLists: this.setBuyLists,
+      deleteBuyList: this.deleteBuyList,
+      updateBuyList: this.updateBuyList,
       setNextLists: this.setNextLists,
       clearError: this.clearError,
       setItems: this.setItems,
       clearItems: this.clearItems,
       addBuyList: this.addBuyList,
       addItem: this.addItem,
+      deleteItem: this.deleteItem,
+      updateItem: this.updateItem,
       addCheck: this.addCheck,
       deleteCheck: this.deleteCheck,
       addNext: this.addNext,
@@ -139,6 +175,8 @@ export class BuyListsProvider extends Component {
       clearNextSet: this.clearNextSet,
       addNextList: this.addNextList,
       clearSelectedBuyList: this.clearSelectedBuyList,
+      clearBuyLists: this.clearBuyLists,
+      clearNextLists: this.clearNextLists,
       error: this.state.error,
       checkSet: this.state.checkSet,
       nextSet: this.state.nextSet,
