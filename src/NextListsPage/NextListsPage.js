@@ -14,7 +14,7 @@ class NextListsPage extends Component {
       .then(res => {
         // console.log(res)
         this.context.setNextLists(res)})
-      .catch(this.context.setError)
+      .catch(err => this.context.setError(err.error))
   }
 
   renderLists(buyLists) {

@@ -60,7 +60,7 @@ class CurListsPage extends Component {
           selectedListId: null,
         })
       })
-      .catch(this.context.setError)
+      .catch(err => this.context.setError(err.error))
   }
   renderLists(selectLists, select) {
     return selectLists.map(list => 

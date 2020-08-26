@@ -44,15 +44,10 @@ export default class Shopping extends Component {
             this.setState({
                 getAll: true,
             })
-            // console.log('ok')
             setTimeout(function(){ 
-                // console.log(this.props.history)
                 this.props.history.push('/buyLists');
              }.bind(this), 3000);
-            // setTimeout(function(){ this.props.history.push('/buyLists'); }, 3000);
-            // setTimeout(, 3000);
         }
-        // this.props.history.push('/finish');
     }
     onUnload(event) { 
         alert('page Refreshed')
@@ -70,8 +65,6 @@ export default class Shopping extends Component {
         if (select === "Now"){
             BuyListApiService.getBuyListItems(listId)
             .then(res => {
-                // this.context.setItems(res.listItems);
-                // this.setState({listName: res.listName});
                 this.context.setSelectedBuyList(res.listItems)
             })
             .catch(err => this.context.setError(err.error))
@@ -79,8 +72,6 @@ export default class Shopping extends Component {
         else if (select === "Next"){
             BuyListApiService.getNextListItems(listId)
             .then(res => {
-                // this.context.setItems(res.listItems);
-                // this.setState({listName: res.listName});
                 this.context.setSelectedBuyList(res.listItems)
             })
             .catch(err => this.context.setError(err.error))
@@ -88,7 +79,6 @@ export default class Shopping extends Component {
         
     }
     componentWillUnmount() {
-        // console.log('ok');
         this.context.clearCheckSet();
         this.context.clearNextSet();
         this.context.clearSelectedBuyList();
@@ -115,22 +105,29 @@ export default class Shopping extends Component {
 
     addNext = (uncheckItems) => {
         const nextItems = uncheckItems.filter(item => this.context.nextSet.has(item.id))
-        // console.log(nextItems)
         const time = new Date();
         const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
         const nextName = formatTime + ' Next'
-        // console.log(nextName)
         if (nextItems.length) {
+
             BuyListApiService.postNextList(nextName, 'Next')
                 .then(res => {
                     this.context.addNextList(res)
+                    const newNextList = res;
                     for (let item of nextItems) {
-                        BuyListApiService.postItemToList(item.id, res.id)
+                        BuyListApiService.postBuyItem(item.item_name)
+                            .then(res => {
+                                let tempItem = res;
+                                BuyListApiService.postItemToList(tempItem.id, newNextList.id)
+                                    .then(() => {
+                                        this.props.history.push('/nextLists');
+                                    })
+                                    .catch(err => this.context.setError(err.error))
+                            })
                             .catch(err => this.context.setError(err.error))
                     }
                 })
                 .catch(err => this.context.setError(err.error))
-            this.props.history.push('/nextLists');
             
         }
         else {
