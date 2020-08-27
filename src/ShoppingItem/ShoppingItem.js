@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
 import './ShoppingItem.css'
 export default class ShoppingItem extends Component {
-  static defaultProps = {
-    item: {},
-  };
   static contextType = BuyListsContext;
   static defaultProps = {
     item: {

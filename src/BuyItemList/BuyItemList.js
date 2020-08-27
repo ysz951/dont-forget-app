@@ -5,9 +5,6 @@ import './BuyItemList.css';
 import ListNav from '../ListNav/ListNav';
 import BuyListApiService from '../services/buylist-api-service';
 export default class BuyItemList extends Component {
-  static defaultProps = {
-    item: {},
-  };
   static contextType = BuyListsContext;
   static defaultProps = {
     match: {
@@ -125,13 +122,10 @@ export default class BuyItemList extends Component {
     });
   }
   render() {
-    const buyLists = this.context.buyLists;
-    const {listId} = this.props;
-    // console.log(listId)
     const { select ='' } = this.props;
-    const ListInd = buyLists.findIndex(list => list.id === Number(listId));
-    const ListName = buyLists[ListInd] ? buyLists[ListInd].name : "";
-    const ListItems = this.context.selectedBuyList || [];
+    const ListItems = this.context.items || [];
+    const {listId} = this.props.match.params;
+    const { error } = this.context;
     return (
         <>
             <ListNav select={select}/>

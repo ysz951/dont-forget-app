@@ -6,7 +6,7 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <BrowserRouter>
-      <CurListsPage />
-    </BrowserRouter>, div);
+        <CurListsPage />
+    </BrowserRouter>, div)
   ReactDOM.unmountComponentAtNode(div)
 });

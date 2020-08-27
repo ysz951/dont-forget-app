@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NotFoundPage from './NotFoundPage';
+import LoginForm from './LoginForm';
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<NotFoundPage />, div)
+  ReactDOM.render(<LoginForm />, div)
   ReactDOM.unmountComponentAtNode(div)
 });
