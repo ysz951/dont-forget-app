@@ -1,22 +1,53 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
-
+import { Link, withRouter } from 'react-router-dom';
+import TokenService from '../services/token-service';
+import IdleService from '../services/idle-service';
 import './Header.css';
 
 class Header extends Component {
+  // static contextType = CollectionListContext;
+  handleLogoutClick = () => {
+    // this.context.clearCollectionList();
+    TokenService.clearAuthToken();
+    /* when logging out, clear the callbacks to the refresh api and idle auto logout */
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unRegisterIdleResets();
+  }
+
+  renderLogoutLink() {
+    return (
+      <div className='Header__log_part'>
+        <Link
+          onClick={this.handleLogoutClick}
+          to='/'>
+          Log out
+        </Link>
+      </div>
+    );
+  }
+
+  renderLoginLink() {
+    return (
+      <div className='Header__log_part'>
+        <Link
+          to='/login'>
+            
+          Log in
+        </Link>
+      </div>
+    );
+  }
   render() {
     return (
       <nav className='Header__name'>
         <h1 className="Header_app_name">
-          <NavLink exact to='/buyList'>
-            Buy List
-          </NavLink>
-          {' '}
-          <NavLink exact to='/nextList'>
-            Next Time List
-          </NavLink>
+          <Link to='/'>
+            Dont Forget
+          </Link>
         </h1>
-        
+        {TokenService.hasAuthToken()
+          ? this.renderLogoutLink()
+          : this.renderLoginLink()}
       </nav>
     );
   }

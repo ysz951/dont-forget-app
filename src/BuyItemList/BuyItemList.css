@@ -11,9 +11,14 @@
 
 }
 .Buy_List_item p {
-    margin: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+
 }
 
 .Buy_List_item {
     margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

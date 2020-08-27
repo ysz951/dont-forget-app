@@ -9,4 +9,4 @@ it('renders without crashing', () => {
       <CurListsPage />
     </BrowserRouter>, div);
   ReactDOM.unmountComponentAtNode(div)
-})
+});

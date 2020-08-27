@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ShoppingItem from './ShoppingItem';
+import FinishItem from './FinishItem';
 import { BrowserRouter } from 'react-router-dom';
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-    <BrowserRouter>
-      <ShoppingItem />
-    </BrowserRouter>, div);
+
+        <FinishItem />
+    , div)
   ReactDOM.unmountComponentAtNode(div)
 });
-

@@ -9,4 +9,5 @@ it('renders without crashing', () => {
       <ListNav />
     </BrowserRouter>, div);
   ReactDOM.unmountComponentAtNode(div)
-})
+});
+
