@@ -10,39 +10,15 @@ export default class AddItem extends Component {
         goBack: () => {},
     }
   };
-  componentDidMount() {
-    const {listId} = this.props.match.params;
-        this.context.clearError();
-        BuyListApiService.getBuyListItems(listId)
-            .then(res => {
-                this.context.setItems(res.listItems);
-                this.setState({listName: res.listName});
-                // this.context.setSelectedBuyList(res.listItems)
-            })
-            .catch(err => this.context.setError(err.error))
-  }
   handleSubmit = ev => {
     ev.preventDefault();
     const {item_name} = ev.target;
     const {listId} = this.props.match.params;
-    const type = this.props.select;
-    console.log(item_name.value, type,listId);
-    // return
     this.context.clearError();
-    // return 
-    BuyListApiService.postBuyItem(item_name.value)
-        // .then(this.context.addBuyList)
+    BuyListApiService.postItem(item_name.value, listId)
         .then(res => {
-            item_name.value = '';
-            // console.log(res)
-            const temp = res;
-            
-            BuyListApiService.postItemToList(res.id, listId)
-                .then(res => {
-                    this.context.addItem(temp);
-                    this.props.history.goBack();
-                })
-                .catch(err => this.context.setError(err.error))
+            this.context.addItem(res)
+            this.props.history.goBack();
         })
         .catch(err => this.context.setError(err.error))
     }

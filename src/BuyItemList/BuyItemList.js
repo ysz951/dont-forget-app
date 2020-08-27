@@ -87,8 +87,8 @@ export default class BuyItemList extends Component {
   submitUpdateItem = ev => {
     ev.preventDefault();
     const {updateItem} = ev.target;
-    // console.log(this.state.selectedListId, updateList.value)
-    BuyListApiService.updateItem(this.state.selectedItemId, updateItem.value)
+    const {listId} = this.props.match.params;
+    BuyListApiService.updateItem(this.state.selectedItemId, updateItem.value, listId)
       .then(res => {
         this.context.updateItem(this.state.selectedItemId, updateItem.value)
         this.setState({

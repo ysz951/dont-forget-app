@@ -30,11 +30,22 @@ class CurListsPage extends Component {
     this.context.clearNextLists();
   }
   deleteList = (listId) => {
-    BuyListApiService.deleteBuyList(listId)
+    const { select ='' } = this.props;
+    if (select === "Now"){
+      BuyListApiService.deleteBuyList(listId)
       .then(res => {
         this.context.deleteBuyList(listId);
       })
       .catch(this.context.setError)
+    }
+    else {
+      BuyListApiService.deleteNextList(listId)
+      .then(res => {
+        this.context.deleteNextList(listId);
+      })
+      .catch(this.context.setError)
+    }
+    
   }
   changeButtonClick = (listId) => {
     this.setState({
@@ -51,8 +62,9 @@ class CurListsPage extends Component {
   submitUpdateList = ev => {
     ev.preventDefault();
     const {updateList} = ev.target;
-    // console.log(this.state.selectedListId, updateList.value)
-    BuyListApiService.updateBuyList(this.state.selectedListId, updateList.value)
+    const { select ='' } = this.props;
+    if (select === 'Now') {
+      BuyListApiService.updateBuyList(this.state.selectedListId, updateList.value)
       .then(res => {
         this.context.updateBuyList(this.state.selectedListId, updateList.value)
         this.setState({
@@ -61,6 +73,18 @@ class CurListsPage extends Component {
         })
       })
       .catch(err => this.context.setError(err.error))
+    }
+    else{
+      BuyListApiService.updateNextList(this.state.selectedListId, updateList.value)
+      .then(res => {
+        this.context.updateNextList(this.state.selectedListId, updateList.value)
+        this.setState({
+          textAreaActive: false,
+          selectedListId: null,
+        })
+      })
+      .catch(err => this.context.setError(err.error))
+    }
   }
   renderLists(selectLists, select) {
     return selectLists.map(list => 

@@ -27,7 +27,6 @@ class NextListsPage extends Component {
 
   render() {
     const { nextLists = [], error } = this.context;
-    console.log(nextLists)
     return (
       <>
         <ListNav select='Next'/>

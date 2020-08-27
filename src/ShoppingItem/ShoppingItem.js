@@ -11,10 +11,15 @@ export default class ShoppingItem extends Component {
   changeCheck = (itemId) => {
     this.setState({checked: !this.state.checked})
     this.state.checked ? this.context.deleteCheck(itemId) : this.context.addCheck(itemId);
+    if (!this.state.checked) {
+      this.context.deleteNext(itemId)
+      this.setState({nextTime: false});
+    }
   }
   changeNext = (itemId) => {
     this.setState({nextTime: !this.state.nextTime})
     this.state.nextTime ? this.context.deleteNext(itemId) : this.context.addNext(itemId);
+    
   }
   render() {
     const {item} = this.props;
@@ -24,9 +29,15 @@ export default class ShoppingItem extends Component {
             <button onClick={() => this.changeCheck(item.id)}>
                 {this.state.checked ? 'Uncheck' : 'Check'}
             </button>
+            {!this.context.nextSet.has(item.id) ?
             <p className = {this.state.checked ? 'Shopping__Item_check' : 'Shopping__Item_uncheck'}>
               {item.item_name}
             </p>
+            :
+            <p className = 'Shopping__Item_uncheck red'>
+              {item.item_name}
+            </p>
+            }
             {!this.state.checked && 
               <button onClick={() => this.changeNext(item.id)}>
                 {this.state.nextTime ? 'Cancel' : "Next Time"}

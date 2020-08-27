@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import {format} from 'date-fns';
 import ShoppingItem from '../ShoppingItem/ShoppingItem';
 import BuyListApiService from '../services/buylist-api-service';
+import FinishItem from '../FinishItem/FinishItem';
 import './ShoppingPage.css';
+
 export default class Shopping extends Component {
     static contextType = BuyListsContext;
     static defaultProps = {
@@ -17,16 +19,9 @@ export default class Shopping extends Component {
         uncheckItems: [],
         showConfirm: false,
         getAll: false,
+        listName: "",
     }
-    renderItems(ListItems) {
-        return (
-            ListItems.map(item => 
-                <li className="Shopping__list_item" key = {item.id}>
-                    <ShoppingItem item={item}/>
-                </li>
-            )
-        )
-    }
+    
     showConfirmFunc = () => {
         this.setState({showConfirm: true});
     }
@@ -38,19 +33,40 @@ export default class Shopping extends Component {
             this.setState({
                 finishStatus:true,
                 uncheckItems,
-            })
+            });
         }
         else{
             this.setState({
                 getAll: true,
-            })
-            setTimeout(function(){ 
-                this.props.history.push('/buyLists');
-             }.bind(this), 3000);
+            });
+            // setTimeout(function(){ 
+            //     this.props.history.push('/buyLists');
+            //  }.bind(this), 1500);
         }
     }
+    deleteList = (listId) => {
+        const { select ='' } = this.props;
+        if (select === "Now"){
+          BuyListApiService.deleteBuyList(listId)
+          .then(res => {
+            this.context.deleteBuyList(listId);
+            this.props.history.push('/buyLists');
+          })
+          .catch(this.context.setError)
+        }
+        else {
+          BuyListApiService.deleteNextList(listId)
+          .then(res => {
+            this.context.deleteNextList(listId);
+            this.props.history.push('/nextLists');
+          })
+          .catch(this.context.setError)
+        }
+        
+    }
+
     onUnload(event) { 
-        alert('page Refreshed')
+        alert('page Refreshed');
     }
     componentDidMount(){
         window.addEventListener("beforeunload", this.onUnload)
@@ -65,14 +81,16 @@ export default class Shopping extends Component {
         if (select === "Now"){
             BuyListApiService.getBuyListItems(listId)
             .then(res => {
-                this.context.setSelectedBuyList(res.listItems)
+                this.context.setSelectedBuyList(res.listItems);
+                this.setState({listName: res.listName});
             })
             .catch(err => this.context.setError(err.error))
         }
         else if (select === "Next"){
             BuyListApiService.getNextListItems(listId)
             .then(res => {
-                this.context.setSelectedBuyList(res.listItems)
+                this.context.setSelectedBuyList(res.listItems);
+                this.setState({listName: res.listName});
             })
             .catch(err => this.context.setError(err.error))
         }
@@ -85,44 +103,29 @@ export default class Shopping extends Component {
         window.removeEventListener("beforeunload", this.onUnload);
         window.onbeforeunload = () => {};
     }
-
-    renderFinish = (uncheckItems) => {
+    renderItems(ListItems) {
         return (
-            uncheckItems.map(item => 
-                <li key={item.id}>
-                    {this.context.nextSet.has(item.id) 
-                    ? <span className="red">{item.item_name}</span>
-                    : item.item_name
-                    }
-                    {this.context.nextSet.has(item.id) 
-                    ? <button onClick={() => {this.context.deleteNext(item.id)}}> cancel </button>
-                    : <button onClick={() => {this.context.addNext(item.id)}}> add next </button>
-                    }
+            ListItems.map(item => 
+                <li className="Shopping__list_item" key = {item.id}>
+                    <ShoppingItem item={item}/>
                 </li>
             )
         )
     }
-
     addNext = (uncheckItems) => {
-        const nextItems = uncheckItems.filter(item => this.context.nextSet.has(item.id))
+        const nextItems = uncheckItems.filter(item => this.context.nextSet.has(item.id));
         const time = new Date();
         const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
-        const nextName = formatTime + ' Next'
+        const nextName = formatTime + ' Next';
         if (nextItems.length) {
-
             BuyListApiService.postNextList(nextName, 'Next')
                 .then(res => {
                     this.context.addNextList(res)
                     const newNextList = res;
                     for (let item of nextItems) {
-                        BuyListApiService.postBuyItem(item.item_name)
-                            .then(res => {
-                                let tempItem = res;
-                                BuyListApiService.postItemToList(tempItem.id, newNextList.id)
-                                    .then(() => {
-                                        this.props.history.push('/nextLists');
-                                    })
-                                    .catch(err => this.context.setError(err.error))
+                        BuyListApiService.postItem(item.item_name, newNextList.id)
+                            .then(() => {
+                                this.props.history.push('/nextLists');
                             })
                             .catch(err => this.context.setError(err.error))
                     }
@@ -132,25 +135,45 @@ export default class Shopping extends Component {
         }
         else {
             this.props.history.push('/buyLists');
-            
         }
     }
-
+    addAll = (uncheckItems) => {
+        const nextItems = uncheckItems;
+        const time = new Date();
+        const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
+        const nextName = formatTime + ' Next'
+        BuyListApiService.postNextList(nextName, 'Next')
+            .then(res => {
+                this.context.addNextList(res)
+                const newNextList = res;
+                for (let item of nextItems) {
+                    BuyListApiService.postItem(item.item_name, newNextList.id)
+                        .then(() => {
+                            this.props.history.push('/nextLists');
+                        })
+                        .catch(err => this.context.setError(err.error))
+                }
+            })
+            .catch(err => this.context.setError(err.error))     
+    }
+        
     render() {
         const ListItems = this.context.selectedBuyList || [];
         const {error} = this.context;
-     
-
+        const {listId} = this.props.match.params;
         const uncheckItems = this.state.uncheckItems || [];
         return  ( error ?
                     <div role='alert'>
                         <p className='red'>{error}</p>
                     </div>
                 :
-                (!this.state.getAll ? 
+
+               <>
+               <h2>Shopping</h2>
+               <h3>{this.state.listName}</h3>
+                {!this.state.getAll ? 
                 (!this.state.finishStatus ? 
-                    (<div>
-                        <h2>Shopping</h2>
+                    (<div>       
                         {this.state.showConfirm && (
                             <div className="Shopping__confirm">
                                 <h2>Are you sure? </h2>
@@ -169,18 +192,21 @@ export default class Shopping extends Component {
                     :
                     (<div>
                         <ul>
-                            {this.renderFinish(uncheckItems)}
+                            <FinishItem uncheckItems={uncheckItems}/>
                         </ul>
                         <button onClick={() => this.addNext(uncheckItems)}>OK </button>
+                        <button onClick={() => this.addAll(uncheckItems)}>Add all to next </button>
                     </div>
                     )
                 )
                 :
                 (<div>
                 <p>Get everything</p>
-                <button onClick={() => this.addNext(uncheckItems)}>OK </button>
+                <button onClick={() => this.addNext([])}>OK </button>
+                <button onClick={() => this.deleteList(listId)}>Delete This List? </button>
                 </div>
-                ))
+                )}
+                </>
         );
     }
 }

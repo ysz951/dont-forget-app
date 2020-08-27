@@ -11,6 +11,8 @@ const BuyListsContext = React.createContext({
   setBuyLists: () => {},
   deleteBuyList: () => {},
   updateBuyList: () => {},
+  deleteNextList: () => {},
+  updateNextList: () => {},
   setNextLists: () => {},
   clearError: () => {},
   setItems: () => {},
@@ -70,11 +72,21 @@ export class BuyListsProvider extends Component {
     const newBuyLists = this.state.buyLists.filter(list => Number(list.id) !== Number(listId));
     this.setBuyLists(newBuyLists);
   }
+  deleteNextList = listId => {
+    const newNextLists = this.state.nextLists.filter(list => Number(list.id) !== Number(listId));
+    this.setNextLists(newNextLists);
+  }
   updateBuyList = (listId, list_name) => {
     const newBuyLists = this.state.buyLists;
     const index = newBuyLists.findIndex(list => list.id === listId);
     newBuyLists[index].list_name = list_name;
     this.setBuyLists(newBuyLists);
+  }
+  updateNextList = (listId, list_name) => {
+    const newNextLists = this.state.nextLists;
+    const index = newNextLists.findIndex(list => list.id === listId);
+    newNextLists[index].list_name = list_name;
+    this.setNextLists(newNextLists);
   }
   addNextList = nextList => {
     this.setNextLists([
@@ -160,6 +172,8 @@ export class BuyListsProvider extends Component {
       deleteBuyList: this.deleteBuyList,
       updateBuyList: this.updateBuyList,
       setNextLists: this.setNextLists,
+      deleteNextList: this.deleteNextList,
+      updateNextList: this.updateNextList,
       clearError: this.clearError,
       setItems: this.setItems,
       clearItems: this.clearItems,

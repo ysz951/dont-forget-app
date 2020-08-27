@@ -17,7 +17,6 @@ import AuthApiService from './services/auth-api-service';
 import IdleService from './services/idle-service';
 import AddList from './AddList/AddList';
 import AddItem from './AddItem/AddItem';
-import FinishPage from './FinishPage/FinishPage';
 import './App.css';
 class App extends Component {
   state = { hasError: false }
@@ -145,10 +144,6 @@ class App extends Component {
               path={`/addBuyItem/:listId`}
               component={AddItem}
               select="Now"
-            />
-            <PrivateRoute
-              path={`/finish`}
-              component={FinishPage}
             />
              <Route
               component={NotFoundPage}
