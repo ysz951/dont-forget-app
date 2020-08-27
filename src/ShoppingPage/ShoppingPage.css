@@ -14,5 +14,6 @@
     transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
-    background-color: purple;
+    background-color: rgb(209, 209, 209);
+    border: 1px solid black;
 }

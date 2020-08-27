@@ -8,6 +8,9 @@ export default class AddItem extends Component {
   static defaultProps = {
     history: {
         goBack: () => {},
+    },
+    match: {
+        params:{}
     }
   };
   handleSubmit = ev => {
@@ -24,7 +27,7 @@ export default class AddItem extends Component {
     }
   render() {
 
-    const { select ='' , history} = this.props;
+    const { select ='' } = this.props;
     const { error } = this.context;
     return (
         <>

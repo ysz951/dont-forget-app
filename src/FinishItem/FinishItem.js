@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
-// import './ShoppingItem.css'
 export default class FinishItem extends Component {
   static contextType = BuyListsContext;
+  static defaultProps = {
+    uncheckItems: [{
+        id: null,
+        item_name: '',
+    }]
+  }
   render() {
     const {uncheckItems} = this.props;
     return (

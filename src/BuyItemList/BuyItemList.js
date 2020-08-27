@@ -6,6 +6,11 @@ import ListNav from '../ListNav/ListNav';
 import BuyListApiService from '../services/buylist-api-service';
 export default class BuyItemList extends Component {
   static contextType = BuyListsContext;
+  static defaultProps = {
+    match: {
+      params:{}
+    }
+  };
   state = {
       listName: '',
       textAreaActive: false,
@@ -43,7 +48,6 @@ export default class BuyItemList extends Component {
     return ( 
         ListItems.map(item => 
             <li className="Buy_List_item" key = {item.id}>
-                
                 { select === "Now" ?
                     this.state.textAreaActive && item.id === this.state.selectedItemId ?
                     <form

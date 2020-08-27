@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
-import { Link } from 'react-router-dom';
 import './ShoppingItem.css'
 export default class ShoppingItem extends Component {
   static contextType = BuyListsContext;
+  static defaultProps = {
+    item: {
+        id: null,
+        item_name: '',
+    }
+  }
   state = {
       checked: false,
       nextTime: false

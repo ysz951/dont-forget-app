@@ -8,6 +8,9 @@ export default class AddList extends Component {
   static defaultProps = {
     history: {
         goBack: () => {},
+    },
+    match: {
+      params:{}
     }
   };
   handleSubmit = ev => {
@@ -27,7 +30,7 @@ export default class AddList extends Component {
     }
   render() {
 
-    const { select ='' , history} = this.props;
+    const { select =''} = this.props;
     return (
         <>
             <ListNav select={select}/>

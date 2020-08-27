@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
-import { Link } from 'react-router-dom';
 import {format} from 'date-fns';
 import ShoppingItem from '../ShoppingItem/ShoppingItem';
 import BuyListApiService from '../services/buylist-api-service';
@@ -13,6 +12,9 @@ export default class Shopping extends Component {
         history: {
           push: () => {},
         },
+        match: {
+          params:{}
+        }
     };
     state = {
         finishStatus: false,
@@ -77,7 +79,6 @@ export default class Shopping extends Component {
         const {listId} = this.props.match.params;
         this.context.clearError();
         const {select} = this.props;
-        // console.log(select)
         if (select === "Now"){
             BuyListApiService.getBuyListItems(listId)
             .then(res => {
@@ -122,13 +123,21 @@ export default class Shopping extends Component {
                 .then(res => {
                     this.context.addNextList(res)
                     const newNextList = res;
-                    for (let item of nextItems) {
-                        BuyListApiService.postItem(item.item_name, newNextList.id)
-                            .then(() => {
-                                this.props.history.push('/nextLists');
-                            })
-                            .catch(err => this.context.setError(err.error))
-                    }
+                    Promise.all(
+                        nextItems.map(item => 
+                            BuyListApiService.postItem(item.item_name, newNextList.id))
+                    )
+                    .then(res => {
+                        this.props.history.push('/nextLists');
+                    })
+                    .catch(err => this.context.setError(err.error))
+                    // for (let item of nextItems) {
+                    //     BuyListApiService.postItem(item.item_name, newNextList.id)
+                    //         .then(() => {
+                    //             this.props.history.push('/nextLists');
+                    //         })
+                    //         .catch(err => this.context.setError(err.error))
+                    // }
                 })
                 .catch(err => this.context.setError(err.error))
             
@@ -146,13 +155,14 @@ export default class Shopping extends Component {
             .then(res => {
                 this.context.addNextList(res)
                 const newNextList = res;
-                for (let item of nextItems) {
-                    BuyListApiService.postItem(item.item_name, newNextList.id)
-                        .then(() => {
-                            this.props.history.push('/nextLists');
-                        })
-                        .catch(err => this.context.setError(err.error))
-                }
+                Promise.all(
+                    nextItems.map(item => 
+                        BuyListApiService.postItem(item.item_name, newNextList.id))
+                )
+                .then(res => {
+                    this.props.history.push('/nextLists');
+                })
+                .catch(err => this.context.setError(err.error))
             })
             .catch(err => this.context.setError(err.error))     
     }
@@ -162,18 +172,17 @@ export default class Shopping extends Component {
         const {error} = this.context;
         const {listId} = this.props.match.params;
         const uncheckItems = this.state.uncheckItems || [];
-        return  ( error ?
-                    <div role='alert'>
-                        <p className='red'>{error}</p>
-                    </div>
+        return (error ?
+                <div role='alert'>
+                    <p className='red'>{error}</p>
+                </div>
                 :
-
-               <>
-               <h2>Shopping</h2>
-               <h3>{this.state.listName}</h3>
+                <>
+                <h2>Shopping</h2>
+                <h3>{this.state.listName}</h3>
                 {!this.state.getAll ? 
-                (!this.state.finishStatus ? 
-                    (<div>       
+                    !this.state.finishStatus ? 
+                    <div>       
                         {this.state.showConfirm && (
                             <div className="Shopping__confirm">
                                 <h2>Are you sure? </h2>
@@ -188,24 +197,21 @@ export default class Shopping extends Component {
                         </ul>
                         <button onClick={() => this.showConfirmFunc()}> Finish </button>
                     </div>
-                    )
                     :
-                    (<div>
+                    <div>
                         <ul>
                             <FinishItem uncheckItems={uncheckItems}/>
                         </ul>
                         <button onClick={() => this.addNext(uncheckItems)}>OK </button>
                         <button onClick={() => this.addAll(uncheckItems)}>Add all to next </button>
                     </div>
-                    )
-                )
                 :
-                (<div>
-                <p>Get everything</p>
-                <button onClick={() => this.addNext([])}>OK </button>
-                <button onClick={() => this.deleteList(listId)}>Delete This List? </button>
+                <div>
+                    <p>Get everything</p>
+                    <button onClick={() => this.addNext([])}>OK </button>
+                    <button onClick={() => this.deleteList(listId)}>Delete This List? </button>
                 </div>
-                )}
+                }
                 </>
         );
     }

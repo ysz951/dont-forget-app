@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CurListsPage from './CurListsPage';
+import ShoppingItem from './ShoppingItem';
 import { BrowserRouter } from 'react-router-dom';
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <BrowserRouter>
-        <CurListsPage />
+        <ShoppingItem />
     </BrowserRouter>, div)
   ReactDOM.unmountComponentAtNode(div)
 });
