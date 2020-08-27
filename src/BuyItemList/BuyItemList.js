@@ -125,7 +125,6 @@ export default class BuyItemList extends Component {
     });
   }
   render() {
-<<<<<<< HEAD
     const buyLists = this.context.buyLists;
     const {listId} = this.props;
     // console.log(listId)
@@ -133,12 +132,6 @@ export default class BuyItemList extends Component {
     const ListInd = buyLists.findIndex(list => list.id === Number(listId));
     const ListName = buyLists[ListInd] ? buyLists[ListInd].name : "";
     const ListItems = this.context.selectedBuyList || [];
-=======
-    const { select ='' } = this.props;
-    const ListItems = this.context.items || [];
-    const {listId} = this.props.match.params;
-    const { error } = this.context;
->>>>>>> mvp
     return (
         <>
             <ListNav select={select}/>
