@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
-import { Link } from 'react-router-dom';
 import ListNav from '../ListNav/ListNav';
 import BuyListApiService from '../services/buylist-api-service';
+import './AddList.css'
 export default class AddList extends Component {
   static contextType = BuyListsContext;
   static defaultProps = {
@@ -35,16 +35,14 @@ export default class AddList extends Component {
         <>
             <ListNav select={select}/>
             <div className="AddList">
+              <h2> Add a list </h2>
                 <form
                     className='AddList__Form'
                     onSubmit={this.handleSubmit}
                 >
-                {/* <div role='alert'>
-                {error && <p className='red'>{error}</p>}
-                </div> */}
                     <div className='AddList__listName_group'>
                         <label htmlFor='AddList__listName_input'>
-                            Add a list
+                            List name
                         </label>
                         <input
                             name='list_name'
@@ -52,8 +50,8 @@ export default class AddList extends Component {
                             required
                             id='AddList__listName_input'/>
                     </div>
-                    <button className="AddList__listName_submitBtn" type='submit'>
-                      add
+                    <button className="AddList__listName_submitBtn btn_type_2" type='submit'>
+                      OK
                     </button>
                 </form>
             </div>

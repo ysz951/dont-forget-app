@@ -1,10 +1,14 @@
 .Shopping__Item{
     display:flex;
+    padding: 5px;
+    align-items: center;
     /* justify-content: space-between; */
 }
 
 .Shopping__Item p{
     margin: 0;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .Shopping__Item_check{

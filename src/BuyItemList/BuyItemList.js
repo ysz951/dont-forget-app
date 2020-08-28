@@ -75,7 +75,7 @@ export default class BuyItemList extends Component {
                         </div>
                     </form>
                     :
-                    <>
+                    <div className="Buy__list_item_delteEditGroup">
                     <button className="Buy_List_item_deleteBtn"onClick={() => this.deleteItem(item.id)}> 
                       <FontAwesomeIcon icon='trash-alt' />
                       {/* Delete  */}
@@ -87,7 +87,7 @@ export default class BuyItemList extends Component {
                       <FontAwesomeIcon icon='edit' />
                       {/* Edit */}
                     </button>
-                    </>
+                    </div>
                 :
                 <p>{item.item_name}</p>
                 }
@@ -138,7 +138,7 @@ export default class BuyItemList extends Component {
         <>
             <ListNav select={select}/>
             {error ?
-            <div role='alert'>
+            <div role='alert' className="Buy__Items_error">
                 <p className='red'>{error}</p>
             </div>
             :
@@ -150,12 +150,16 @@ export default class BuyItemList extends Component {
                 {select === "Now" ?
                 <p className="Buy__shoppingLink">
                     <Link to={`/shopping/now/${listId}`}>
-                        Go Shopping
+                    <FontAwesomeIcon className="Buy__shoppingLink__icon" icon="shopping-cart"/>
+                    {' '}
+                    Go Shopping
                     </Link>
                 </p>
                 :
                 <p className="Buy__shoppingLink">
                     <Link to={`/shopping/next/${listId}`}>
+                    <FontAwesomeIcon className="Buy__shoppingLink__icon" icon="shopping-cart"/>
+                    {' '}
                         Go Shopping
                     </Link>
                 </p>
@@ -163,8 +167,13 @@ export default class BuyItemList extends Component {
                 {   
                     select === "Now" && 
                     <Link className = 'AddItem__Link' to={`/addBuyItem/${listId}`}> 
-                        Add a item 
+                    <FontAwesomeIcon className="AddBuyList_item__icon" icon="plus"/>
+                        <span>Item</span>
                     </Link>
+                  //   <Link className = 'AddBuyList__Link' to='/addbuylist'> 
+                  //   <FontAwesomeIcon className="AddBuyList__icon" icon="plus"/>
+                  //     <span>List</span>
+                  // </Link>
                 }
             </section>
             }

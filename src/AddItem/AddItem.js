@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
-import { Link } from 'react-router-dom';
 import ListNav from '../ListNav/ListNav';
 import BuyListApiService from '../services/buylist-api-service';
+import './AddItem.css'
 export default class AddItem extends Component {
   static contextType = BuyListsContext;
   static defaultProps = {
@@ -33,18 +33,19 @@ export default class AddItem extends Component {
         <>
             <ListNav select={select}/>
             {error ?
-            <div role='alert'>
+            <div role='alert'  className="Buy__Items_error">
                 <p className='red'>error</p>
             </div>
             :
             <div className="AddItem">
+                <h2>Add a item</h2>
                 <form
                     className='AddItem__Form'
                     onSubmit={this.handleSubmit}
                 >
                     <div className='AddItem__itemName_group'>
                         <label htmlFor='AddItem__itemName_input'>
-                            Add a item
+                            Item name
                         </label>
                         <input
                             name='item_name'
@@ -52,7 +53,7 @@ export default class AddItem extends Component {
                             required
                             id='AddItem__itemName_input'/>
                     </div>
-                    <button className="AddItem__itemName_submitBtn" type='submit'>
+                    <button className="AddItem__itemName_submitBtn btn_type_2" type='submit'>
                       add
                     </button>
                 </form>

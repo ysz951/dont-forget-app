@@ -10,8 +10,6 @@
     flex-direction: column;
     align-items: center;
     background-color: rgb(109, 179, 109);
-    /* width: 40px;
-    height: 40px; */
     width: 66px;
     padding: 15px;
     border-radius: 50px;
@@ -24,7 +22,7 @@
 .Buy__Lists_section {
     padding-top: 73px;
     /* background-color: rgb(217, 217, 217); */
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 .Buy__Lists{
@@ -33,11 +31,15 @@
 }
 
 .Buy__list{
+    
+    border-bottom: 1px solid rgb(192, 192, 192);
+}
+
+.Buy__list_delteEditGroup{
     display: flex;
     flex-direction: row;
     /* justify-content: center; */
     align-items: center;
-    border-bottom: 1px solid rgb(192, 192, 192);
 }
 
 .Buy__list button{
@@ -61,6 +63,10 @@
     margin-right: 10px;
 }
 
+.Buy__list_dateCreated{
+    margin-top: 0;
+}
+
 .Buy__list_form {
     margin-left: 10px;
     width: 60%;
@@ -74,4 +80,12 @@
 .Buy__list_updateBtnGroup{
     display: flex;
     justify-content: flex-end;
+}
+
+
+@media screen and (min-width: 500px) {
+    .Buy__list_form {
+        width: 40%;
+    }
+
 }

@@ -1,3 +1,12 @@
+.Shopping_section{
+    padding-top: 50px;
+}
+
+.Shopping_section h2, h3{
+    margin-left: 10px;
+}
+
+
 .Shopping__list{
     list-style: none;
     padding-left: 0;
@@ -5,6 +14,8 @@
 .Shopping__list li{
     text-align: center;
     margin: 10px 0;
+    border-bottom: 1px solid rgb(192, 192, 192);
+    padding-left: 5px;
 }
 
 .Shopping__confirm{
@@ -16,4 +27,44 @@
     -webkit-transform: translate(-50%, -50%);
     background-color: rgb(209, 209, 209);
     border: 1px solid black;
+    padding: 10px;
+}
+
+.Shopping__confirm h2{
+    margin: 0;
+}
+
+.Shpping__confirm_btnGroup{
+    margin-top:20px;
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.Shpping__confirm_btnGroup button{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 4px;
+}
+
+.Shopping_Finish_btn{
+    margin-left: 10px;
+}
+
+.Finish_btnGroup {
+    margin-left: 20px;
+    
+}
+
+.Finish_btnGroup button{
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 8px;
+}
+
+@media screen and (min-width: 500px) {
+    .Shopping__confirm{
+        padding: 20px; 
+    }
+
 }

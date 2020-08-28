@@ -31,7 +31,7 @@ export default class ShoppingItem extends Component {
     
     return (
         <div className="Shopping__Item">
-            <button onClick={() => this.changeCheck(item.id)}>
+            <button className="btn_type_2" onClick={() => this.changeCheck(item.id)}>
                 {this.state.checked ? 'Uncheck' : 'Check'}
             </button>
             {!this.context.nextSet.has(item.id) ?
@@ -44,7 +44,7 @@ export default class ShoppingItem extends Component {
             </p>
             }
             {!this.state.checked && 
-              <button onClick={() => this.changeNext(item.id)}>
+              <button className="btn_type_2" onClick={() => this.changeNext(item.id)}>
                 {this.state.nextTime ? 'Cancel' : "Next Time"}
               </button>}
         </div>

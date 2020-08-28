@@ -3,11 +3,14 @@
     margin: 0;
     display: flex;
     /* padding-top: 10px; */
-    padding-left: 0;
+    padding-left: 1px;
+    padding-right:1px;
     flex-direction: row;
     position: fixed;
     top: 48px;
+    /* left: 1px; */
     width: 100%;
+    /* width: 82%; */
     max-width: 900px;
     background-color: rgb(102, 102, 102);
     /* justify-content: space-evenly; */
@@ -22,6 +25,7 @@
     text-align: center;
     margin: 0;
     padding:10px;
+    padding-left: 5px;
     font-size: large;
 }
 
@@ -29,10 +33,17 @@
     opacity: 0.8;
 }
 
-.ListNav a {
+.ListNav h2 {
     color: white;
+    
 }
 
-.Seleted_Nav{
-    background-color: rgb(46, 46, 46);
+.Seleted_Nav h2{
+    /* background-color: rgb(46, 46, 46); */
+    background-color: rgb(233, 233, 233);
+    color: #222;
+    border-bottom: 1px solid rgb(218, 218, 218);
 }
+
+
+

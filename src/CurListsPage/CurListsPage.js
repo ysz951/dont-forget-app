@@ -4,6 +4,7 @@ import ListNav from '../ListNav/ListNav';
 import { Link, withRouter } from 'react-router-dom';
 import BuyListApiService from '../services/buylist-api-service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {format} from 'date-fns';
 import './CurListsPage.css';
 class CurListsPage extends Component {
   static contextType = BuyListsContext;
@@ -113,7 +114,7 @@ class CurListsPage extends Component {
             </div>
           </form>
           :
-          <>
+          <div className="Buy__list_delteEditGroup">
           {/* faEdit, faTrashAlt */}
             <button className="Buy__list_deleteBtn" onClick={() => this.deleteList(list.id)}>
               <FontAwesomeIcon icon='trash-alt' />
@@ -126,9 +127,9 @@ class CurListsPage extends Component {
               <FontAwesomeIcon icon='edit' />
               {/* Edit */}
             </button>
-          </>
+          </div>
           }
-        
+        <p className="Buy__list_dateCreated">{format(new Date(list.date_created), "yyyy-MM-dd HH:mm:ss")}</p>
       </li>
       )
   }
@@ -141,6 +142,9 @@ class CurListsPage extends Component {
       <>
         <ListNav select={select}/>
         <section className="Buy__Lists_section">
+          <div role='alert'>
+            <p className='red'>{error}</p>
+          </div>
           <ul className="Buy__Lists">
             {this.renderLists(selectLists, select)}
           </ul>
@@ -171,5 +175,6 @@ function BuyList({list, select}){
         </Link>
         }
     </p>
+
   )
 }

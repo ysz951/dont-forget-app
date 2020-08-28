@@ -177,7 +177,7 @@ export default class Shopping extends Component {
                     <p className='red'>{error}</p>
                 </div>
                 :
-                <>
+                <section className="Shopping_section">
                 <h2>Shopping</h2>
                 <h3>{this.state.listName}</h3>
                 {!this.state.getAll ? 
@@ -186,24 +186,38 @@ export default class Shopping extends Component {
                         {this.state.showConfirm && (
                             <div className="Shopping__confirm">
                                 <h2>Are you sure? </h2>
-                                <div>
-                                    <button onClick={() => this.setState({showConfirm:false})}>No</button>
-                                    <button onClick={() => this.finishShopping()}>Yes</button>
+                                <div className="Shpping__confirm_btnGroup">
+                                    <button className="btn_type_2" 
+                                    onClick={() => this.setState({showConfirm:false})}>
+                                        No
+                                    </button>
+                                    <button className="btn_type_2" onClick={() => this.finishShopping()}>
+                                        Yes
+                                    </button>
                                 </div>
                             </div>
                         )}
                         <ul className="Shopping__list">
                             {this.renderItems(ListItems)}
                         </ul>
-                        <button onClick={() => this.showConfirmFunc()}> Finish </button>
+                        <button className="btn_type_1 Shopping_Finish_btn" 
+                        onClick={() => this.showConfirmFunc()}> 
+                            Finish 
+                        </button>
                     </div>
                     :
                     <div>
                         <ul>
                             <FinishItem uncheckItems={uncheckItems}/>
                         </ul>
-                        <button onClick={() => this.addNext(uncheckItems)}>OK </button>
-                        <button onClick={() => this.addAll(uncheckItems)}>Add all to next </button>
+                        <div className="Finish_btnGroup">
+                            <button className="btn_type_2" onClick={() => this.addNext(uncheckItems)}> 
+                                OK 
+                            </button>
+                            <button className="btn_type_2" onClick={() => this.addAll(uncheckItems)}>
+                                Add all to next 
+                            </button>
+                        </div>
                     </div>
                 :
                 <div>
@@ -212,7 +226,7 @@ export default class Shopping extends Component {
                     <button onClick={() => this.deleteList(listId)}>Delete This List? </button>
                 </div>
                 }
-                </>
+                </section>
         );
     }
 }
