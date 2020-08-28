@@ -82,7 +82,7 @@ export default class BuyItemList extends Component {
                     {/* Delete  */}
                   </button>
                   {' '}
-                  <p>{item.item_name}</p>
+                  <p className="Fredoka">{item.item_name}</p>
                   {' '}
                   <button className="Buy_List_item_editBtn" onClick={() => this.changeButtonClick(item.id)}> 
                     <FontAwesomeIcon icon='edit' />
@@ -91,7 +91,7 @@ export default class BuyItemList extends Component {
                   </div>
 
                 }
-                <p className="Buy__list_item_dateCreated">{format(new Date(item.date_created), "yyyy-MM-dd HH:mm:ss")}</p>
+                <p className="Buy__list_item_dateCreated Lora">{format(new Date(item.date_created), "yyyy-MM-dd HH:mm:ss")}</p>
             </li>
             
         )

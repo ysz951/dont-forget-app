@@ -35,7 +35,7 @@ export default class ShoppingItem extends Component {
                 {this.state.checked ? 'Uncheck' : 'Check'}
             </button>
             {!this.context.nextSet.has(item.id) ?
-            <p className = {this.state.checked ? 'Shopping__Item_check' : 'Shopping__Item_uncheck'}>
+            <p className = {this.state.checked ? 'Shopping__Item_check' : 'Shopping__Item_uncheck bold'}>
               {item.item_name}
             </p>
             :

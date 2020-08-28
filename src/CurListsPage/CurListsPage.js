@@ -129,7 +129,7 @@ class CurListsPage extends Component {
             </button>
           </div>
           }
-        <p className="Buy__list_dateCreated">{format(new Date(list.date_created), "yyyy-MM-dd HH:mm:ss")}</p>
+        <p className="Buy__list_dateCreated Lora">{format(new Date(list.date_created), "yyyy-MM-dd HH:mm:ss")}</p>
       </li>
       )
   }
@@ -164,7 +164,7 @@ export default withRouter(CurListsPage)
 
 function BuyList({list, select}){
   return (
-    <p className="Buy__list_name">
+    <p className="Buy__list_name Fredoka">
         {select === "Now" ?
         <Link to={`/buyLists/${list.id}`}>
             {list.list_name}
