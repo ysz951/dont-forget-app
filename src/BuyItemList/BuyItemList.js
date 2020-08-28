@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './BuyItemList.css';
 import ListNav from '../ListNav/ListNav';
 import BuyListApiService from '../services/buylist-api-service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default class BuyItemList extends Component {
   static contextType = BuyListsContext;
   static defaultProps = {
@@ -63,22 +64,29 @@ export default class BuyItemList extends Component {
                         defaultValue={item.item_name}
                         rows='1'
                         />
-                        <div className="Recipepage__comment_CommentFormButton">
-                        <button className="btn_type_2" type='button' onClick={this.closeTextArea}>
-                            Cancel
-                        </button>
-                        <button className="btn_type_3" type='submit'>
-                            Update
-                        </button>
+                        <div className="Buy__list_item_updateBtnGroup">
+                          <button className="btn_type_2" type='button' 
+                            onClick={this.closeTextArea}>
+                              Cancel
+                          </button>
+                          <button className="btn_type_3" type='submit'>
+                              Update
+                          </button>
                         </div>
                     </form>
                     :
                     <>
-                    <button onClick={() => this.deleteItem(item.id)}> Delete </button>
+                    <button className="Buy_List_item_deleteBtn"onClick={() => this.deleteItem(item.id)}> 
+                      <FontAwesomeIcon icon='trash-alt' />
+                      {/* Delete  */}
+                    </button>
                     {' '}
                     <p>{item.item_name}</p>
                     {' '}
-                    <button onClick={() => this.changeButtonClick(item.id)}> Edit</button>
+                    <button className="Buy_List_item_editBtn" onClick={() => this.changeButtonClick(item.id)}> 
+                      <FontAwesomeIcon icon='edit' />
+                      {/* Edit */}
+                    </button>
                     </>
                 :
                 <p>{item.item_name}</p>
@@ -134,7 +142,7 @@ export default class BuyItemList extends Component {
                 <p className='red'>{error}</p>
             </div>
             :
-            <div>
+            <section className="Buy__Items_section">
                 <h2>{this.state.listName}</h2>
                 <ul className="Buy__ListItems">
                     {this.renderItems(ListItems, select)}
@@ -158,7 +166,7 @@ export default class BuyItemList extends Component {
                         Add a item 
                     </Link>
                 }
-            </div>
+            </section>
             }
         </>
     );

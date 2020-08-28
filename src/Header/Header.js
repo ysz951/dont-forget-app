@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import TokenService from '../services/token-service';
 import IdleService from '../services/idle-service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Header.css';
 
 class Header extends Component {
@@ -20,23 +21,25 @@ class Header extends Component {
         <Link
           onClick={this.handleLogoutClick}
           to='/'>
+          <FontAwesomeIcon icon='sign-out-alt' />
+          {' '}
           Log out
         </Link>
       </div>
     );
   }
 
-  renderLoginLink() {
-    return (
-      <div className='Header__log_part'>
-        <Link
-          to='/login'>
+  // renderLoginLink() {
+  //   return (
+  //     <div className='Header__log_part'>
+  //       <Link
+  //         to='/login'>
             
-          Log in
-        </Link>
-      </div>
-    );
-  }
+  //         Log in
+  //       </Link>
+  //     </div>
+  //   );
+  // }
   render() {
     return (
       <nav className='Header__name'>
@@ -45,9 +48,10 @@ class Header extends Component {
             Dont Forget
           </Link>
         </h1>
-        {TokenService.hasAuthToken()
-          ? this.renderLogoutLink()
-          : this.renderLoginLink()}
+        {
+          TokenService.hasAuthToken()
+          && this.renderLogoutLink()
+        }
       </nav>
     );
   }

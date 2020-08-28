@@ -9,11 +9,11 @@ function LandingPage(props){
             </div>
             <div className="LandingPage_text_group">
                 
-                <h1>
+                <h2>
                     <span className="Lustria">
                         Dont forget what you want !
                     </span>
-                </h1>
+                </h2>
                 
                 <p>Build a Buy List</p>
                 <p>Check the items of list during shopping</p>

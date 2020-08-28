@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBars, faSearch, faStar, faUser, 
+import { faBars, faSearch, faStar, faUser, faPlus,
 faArrowUp, faSignInAlt, faSignOutAlt, faUserEdit, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import {BuyListsProvider} from './context/BuyListsContext';
 library.add(
@@ -18,6 +18,7 @@ library.add(
   faUserEdit,
   faEdit,
   faTrashAlt,
+  faPlus,
 );
 ReactDOM.render(
   <BrowserRouter>

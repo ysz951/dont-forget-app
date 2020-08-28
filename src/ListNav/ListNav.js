@@ -6,28 +6,39 @@ export default function ListNav(props) {
     return (
         <ul className="ListNav">
             <li>
-                <h2> 
+                
                 {select === 'Now' 
-                ?   <Link to='/buyLists' className="Seleted_Nav">
+                ?   
+                <h2 className="Seleted_Nav"> 
+                    <Link to='/buyLists'>
                         Buy List
                     </Link>
-                :   <Link to='/buyLists'>
-                        Buy List
-                    </Link>
-                }
                 </h2>
+                :   
+                <h2> 
+                    <Link to='/buyLists'>
+                        Buy List
+                    </Link>
+                </h2>
+                }
             </li>
             <li> 
-                <h2>
+                
                 {select === 'Next' 
-                ?   <Link to='/nextLists' className="Seleted_Nav">
+                ?   
+                <h2  className="Seleted_Nav">
+                    <Link to='/nextLists'>
                         Next Time List
                     </Link>
-                :   <Link to='/nextLists'>
-                        Next Time List
-                    </Link>
-                }
                 </h2>
+                :   
+                <h2>
+                    <Link to='/nextLists'>
+                        Next Time List
+                    </Link>
+                </h2>
+                }
+                
             </li>
         </ul>
     )

@@ -1,5 +1,24 @@
 
-.LandingPage_text_group h1{
+.LandingPage_text_group{
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    top: 25vh;
+    height: 100vh;
+    /* top: 5vh; */
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.LandingPage_text_group p{
+    /* opacity: 1; */
+    margin-top: 0;
+    margin-bottom: 5vh;
+    text-align: center;
+}
+
+.LandingPage_text_group h2{
     /* opacity: 1; */
     margin-top: 0;
     margin-bottom: 10vh;

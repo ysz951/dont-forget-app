@@ -1,11 +1,21 @@
+.AddItem__Link{
+    position: fixed;
+    bottom: 5vh;
+    left: 50%; 
+     transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%); 
+}
+
+.Buy__Items_section{
+    padding-top: 87px;
+}
+
 .Buy__ListItems{
     list-style: none;
     padding-left: 0;
 }
 
-.Buy__ListItems li{
-    text-align: center;
-}
 .Buy__shoppingLink{
     text-align: center;
 
@@ -20,5 +30,40 @@
     margin: 10px 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
+}
+
+
+.Buy_List_item button{
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.Buy_List_item_deleteBtn{
+    visibility: hidden;
+}
+
+.Buy_List_item_editBtn{
+    visibility: hidden;
+}
+
+.Buy_List_item:hover button{
+    visibility: visible;
+}
+
+.Buy_List_item_form {
+    margin-left: 10px;
+    width: 60%;
+}
+
+.Buy_List_item_textarea {
+    padding: 3px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.Buy__list_item_updateBtnGroup{
+    display: flex;
+    justify-content: flex-end;
 }

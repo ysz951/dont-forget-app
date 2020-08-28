@@ -3,7 +3,7 @@ import BuyListsContext from '../context/BuyListsContext';
 import ListNav from '../ListNav/ListNav';
 import { Link, withRouter } from 'react-router-dom';
 import BuyListApiService from '../services/buylist-api-service';
-// import BuyList from '../BuyList/BuyList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './CurListsPage.css';
 class CurListsPage extends Component {
   static contextType = BuyListsContext;
@@ -103,7 +103,7 @@ class CurListsPage extends Component {
               defaultValue={list.list_name}
               rows='1'
             />
-            <div className="Recipepage__comment_CommentFormButton">
+            <div className="Buy__list_updateBtnGroup">
               <button className="btn_type_2" type='button' onClick={this.closeTextArea}>
                 Cancel
               </button>
@@ -114,11 +114,18 @@ class CurListsPage extends Component {
           </form>
           :
           <>
-            <button onClick={() => this.deleteList(list.id)}> Delete </button>
+          {/* faEdit, faTrashAlt */}
+            <button className="Buy__list_deleteBtn" onClick={() => this.deleteList(list.id)}>
+              <FontAwesomeIcon icon='trash-alt' />
+              {/* Delete  */}
+            </button>
             {' '}
             <BuyList list={list} select={select}/>
             {' '}
-            <button onClick={() => this.changeButtonClick(list.id)}> Edit</button>
+            <button className="Buy__list_editBtn" onClick={() => this.changeButtonClick(list.id)}> 
+              <FontAwesomeIcon icon='edit' />
+              {/* Edit */}
+            </button>
           </>
           }
         
@@ -133,7 +140,7 @@ class CurListsPage extends Component {
     return (
       <>
         <ListNav select={select}/>
-        <section>
+        <section className="Buy__Lists_section">
           <ul className="Buy__Lists">
             {this.renderLists(selectLists, select)}
           </ul>
@@ -141,7 +148,8 @@ class CurListsPage extends Component {
         {
           select === "Now" && 
           <Link className = 'AddBuyList__Link' to='/addbuylist'> 
-            Add a list 
+            <FontAwesomeIcon className="AddBuyList__icon" icon="plus"/>
+              <span>List</span>
           </Link>
         }
       </>

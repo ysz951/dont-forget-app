@@ -4,16 +4,27 @@
 }
 
 
-.Header__name a {
-    color: #444;
-}
-
 .Header__name {
     display: flex;
+    align-items: center;
+    padding: 10px;
     justify-content: space-between;
+    font-size: large;
+    background-color: rgb(148, 127, 87);
 }
 
-/* .Header_app_name{
-    display: flex;
-    justify-content: space-evenly;
-} */
+.Header_app_name{
+    margin: 0;
+}
+
+.Header__log_part{
+    font-size: smaller;
+}
+
+.Header__name a {
+    color: white;
+}
+
+.Header__name a:hover {
+    color: rgb(206, 206, 206);
+}

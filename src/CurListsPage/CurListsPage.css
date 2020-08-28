@@ -1,14 +1,30 @@
-.dummy_space{
-    margin-top: 100px;
-}
 
 .AddBuyList__Link {
-    /* position: fixed;
-    bottom: 20vh;
-    left: 5vh; */
-    /* transform: translateX(-50%);
+    position: fixed;
+    bottom: 5vh;
+    left: 50%; 
+     transform: translateX(-50%);
     -moz-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%); */
+    -webkit-transform: translateX(-50%); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(109, 179, 109);
+    /* width: 40px;
+    height: 40px; */
+    width: 66px;
+    padding: 15px;
+    border-radius: 50px;
+}
+
+.AddBuyList__icon{
+    font-size: large;
+}
+
+.Buy__Lists_section {
+    padding-top: 73px;
+    /* background-color: rgb(217, 217, 217); */
+    min-height: 100vh;
 }
 
 .Buy__Lists{
@@ -19,12 +35,43 @@
 .Buy__list{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    border-bottom: 1px solid rgb(192, 192, 192);
+}
+
+.Buy__list button{
+    outline: none;
+    border: none;
+    background: none;
+}
+.Buy__list_deleteBtn{
+    visibility: hidden;
+}
+.Buy__list_editBtn{
+    visibility: hidden;
+}
+
+.Buy__list:hover button{
+    visibility: visible;
 }
 
 .Buy__list_name{
-    /* text-align: center; */
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.Buy__list_form {
+    margin-left: 10px;
+    width: 60%;
+}
+
+.Buy__list_textarea {
+    padding: 3px;
+    margin-top: 5px;
+    width: 100%;
+}
+.Buy__list_updateBtnGroup{
+    display: flex;
+    justify-content: flex-end;
 }

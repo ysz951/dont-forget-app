@@ -1,19 +1,38 @@
 .ListNav{
     list-style: none;
-    padding: 0;
+    margin: 0;
     display: flex;
+    /* padding-top: 10px; */
+    padding-left: 0;
     flex-direction: row;
+    position: fixed;
+    top: 48px;
+    width: 100%;
+    max-width: 900px;
+    background-color: rgb(102, 102, 102);
     /* justify-content: space-evenly; */
 }
 
 .ListNav li{
-    flex: 1;
+    flex: 1;   
 }
+
 
 .ListNav h2{
     text-align: center;
+    margin: 0;
+    padding:10px;
+    font-size: large;
+}
+
+.ListNav h2:hover{
+    opacity: 0.8;
+}
+
+.ListNav a {
+    color: white;
 }
 
 .Seleted_Nav{
-    background-color: red;
+    background-color: rgb(46, 46, 46);
 }

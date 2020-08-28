@@ -38,6 +38,14 @@ a:active{
   color: #222;
 }
 
+a:hover{
+  color: rgb(110, 91, 91);
+}
+
+a {
+  text-decoration: none;
+}
+
 /* button style */
 button{
   cursor: pointer;
@@ -64,8 +72,8 @@ button{
   order: none;
   background-color: rgb(255, 255, 255);
   color: rgb(100, 100, 100);
-  border-radius: 4px;
-  padding: 5px;
+  border-radius: 2px;
+  padding: 3px;
 }
 
 .btn_type_2:hover{
@@ -77,14 +85,16 @@ button{
   order: none;
   background-color: rgb(43, 69, 92);
   border-color:rgb(67, 103, 133);
-  color: rgb(247, 247, 247);
-  border-radius: 4px;
-  padding: 5px;
+  /* color: rgb(247, 247, 247); */
+  color: rgb(100, 100, 100);
+  border-radius: 2px;
+  padding: 3px;
 }
 
 .btn_type_3:hover{
   /* color:rgb(0, 0, 0); */
   background-color:rgb(67, 103, 133);
+  color: rgb(247, 247, 247);
 }
 
 /* font size */
