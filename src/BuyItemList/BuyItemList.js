@@ -5,6 +5,7 @@ import './BuyItemList.css';
 import ListNav from '../ListNav/ListNav';
 import BuyListApiService from '../services/buylist-api-service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {format} from 'date-fns';
 export default class BuyItemList extends Component {
   static contextType = BuyListsContext;
   static defaultProps = {
@@ -49,48 +50,48 @@ export default class BuyItemList extends Component {
     return ( 
         ListItems.map(item => 
             <li className="Buy_List_item" key = {item.id}>
-                { select === "Now" ?
-                    this.state.textAreaActive && item.id === this.state.selectedItemId ?
-                    <form
-                        className='Buy_List_item_form'
-                        onSubmit={this.submitUpdateItem}
-                    > 
-                        <textarea
-                        className='Buy_List_item_textarea'
-                        required
-                        aria-label='Type a item name...'
-                        name='updateItem'
-                        id='updateItem'
-                        defaultValue={item.item_name}
-                        rows='1'
-                        />
-                        <div className="Buy__list_item_updateBtnGroup">
-                          <button className="btn_type_2" type='button' 
-                            onClick={this.closeTextArea}>
-                              Cancel
-                          </button>
-                          <button className="btn_type_3" type='submit'>
-                              Update
-                          </button>
-                        </div>
-                    </form>
-                    :
-                    <div className="Buy__list_item_delteEditGroup">
-                    <button className="Buy_List_item_deleteBtn"onClick={() => this.deleteItem(item.id)}> 
-                      <FontAwesomeIcon icon='trash-alt' />
-                      {/* Delete  */}
-                    </button>
-                    {' '}
-                    <p>{item.item_name}</p>
-                    {' '}
-                    <button className="Buy_List_item_editBtn" onClick={() => this.changeButtonClick(item.id)}> 
-                      <FontAwesomeIcon icon='edit' />
-                      {/* Edit */}
-                    </button>
-                    </div>
-                :
-                <p>{item.item_name}</p>
+                {
+                  this.state.textAreaActive && item.id === this.state.selectedItemId ?
+                  <form
+                      className='Buy_List_item_form'
+                      onSubmit={this.submitUpdateItem}
+                  > 
+                      <textarea
+                      className='Buy_List_item_textarea'
+                      required
+                      aria-label='Type a item name...'
+                      name='updateItem'
+                      id='updateItem'
+                      defaultValue={item.item_name}
+                      rows='1'
+                      />
+                      <div className="Buy__list_item_updateBtnGroup">
+                        <button className="btn_type_2" type='button' 
+                          onClick={this.closeTextArea}>
+                            Cancel
+                        </button>
+                        <button className="btn_type_3" type='submit'>
+                            Update
+                        </button>
+                      </div>
+                  </form>
+                  :
+                  <div className="Buy__list_item_delteEditGroup">
+                  <button className="Buy_List_item_deleteBtn"onClick={() => this.deleteItem(item.id)}> 
+                    <FontAwesomeIcon icon='trash-alt' />
+                    {/* Delete  */}
+                  </button>
+                  {' '}
+                  <p>{item.item_name}</p>
+                  {' '}
+                  <button className="Buy_List_item_editBtn" onClick={() => this.changeButtonClick(item.id)}> 
+                    <FontAwesomeIcon icon='edit' />
+                    {/* Edit */}
+                  </button>
+                  </div>
+
                 }
+                <p className="Buy__list_item_dateCreated">{format(new Date(item.date_created), "yyyy-MM-dd HH:mm:ss")}</p>
             </li>
             
         )

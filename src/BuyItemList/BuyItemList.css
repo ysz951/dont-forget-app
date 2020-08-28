@@ -89,3 +89,8 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.Buy__list_item_dateCreated{
+    margin-top: 0;
+    margin-left: 10px;
+}

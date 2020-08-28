@@ -13,6 +13,22 @@ export default class AddItem extends Component {
         params:{}
     }
   };
+
+  componentDidMount(){
+    const {listId} = this.props.match.params;
+    this.context.clearError();
+    const { select ='' } = this.props;
+    if (select === 'Now') {
+        BuyListApiService.getBuyListById(listId)
+        .catch(err => this.context.setError(err.error))
+    }
+    else {
+        BuyListApiService.getNextListById(listId)
+        .catch(err => this.context.setError(err.error))
+    }
+ }
+    
+
   handleSubmit = ev => {
     ev.preventDefault();
     const {item_name} = ev.target;
@@ -34,7 +50,7 @@ export default class AddItem extends Component {
             <ListNav select={select}/>
             {error ?
             <div role='alert'  className="Buy__Items_error">
-                <p className='red'>error</p>
+                <p className='red'>{error}</p>
             </div>
             :
             <div className="AddItem">
@@ -53,8 +69,13 @@ export default class AddItem extends Component {
                             required
                             id='AddItem__itemName_input'/>
                     </div>
-                    <button className="AddItem__itemName_submitBtn btn_type_2" type='submit'>
-                      add
+                    <button className="AddItem__itemName_Btn btn_type_2" type='button'
+                    onClick={() => {this.props.history.goBack()}}>
+                      Cancel
+                    </button>
+                    {' '}
+                    <button className="AddItem__itemName_Btn btn_type_2" type='submit'>
+                      Ok
                     </button>
                 </form>
             </div>}

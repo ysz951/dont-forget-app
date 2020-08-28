@@ -10,7 +10,7 @@ export default function ListNav(props) {
                 
                 {select === 'Now' 
                 ?   
-                    <Link  className="Seleted_Nav" to='/buyLists'>
+                    <Link  className="Seleted_Nav border_left" to='/buyLists'>
                         <h2> 
                             Buy List
                         </h2>
@@ -29,7 +29,7 @@ export default function ListNav(props) {
                 
                 {select === 'Next' 
                 ?               
-                    <Link   className="Seleted_Nav" to='/nextLists'>
+                    <Link   className="Seleted_Nav border_right" to='/nextLists'>
                         <h2>
                             Next Time List
                         </h2>

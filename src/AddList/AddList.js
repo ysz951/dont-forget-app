@@ -50,7 +50,12 @@ export default class AddList extends Component {
                             required
                             id='AddList__listName_input'/>
                     </div>
-                    <button className="AddList__listName_submitBtn btn_type_2" type='submit'>
+                    <button className="AddItem__itemName_Btn btn_type_2" type='button'
+                    onClick={() => {this.props.history.goBack()}}>
+                      Cancel
+                    </button>
+                    {' '}
+                    <button className="AddList__listName_Btn btn_type_2" type='submit'>
                       OK
                     </button>
                 </form>

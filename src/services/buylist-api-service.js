@@ -14,6 +14,19 @@ const BuyListApiService = {
             : res.json()
         )
     },
+    getBuyListById(listId) {
+        return fetch(`${config.API_ENDPOINT}/buylists/${listId}`, {
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+        })
+        .then(res =>
+
+            (!res.ok)
+            ? res.json().then(e => Promise.reject(e))
+            : res.json()
+        )
+    },
     getBuyListItems(listId) {
         return fetch(`${config.API_ENDPOINT}/buylists/${listId}/items`, {
             headers: {
@@ -40,6 +53,19 @@ const BuyListApiService = {
             : res.json()
         )
     },
+    getNextListById(listId) {
+        return fetch(`${config.API_ENDPOINT}/nextlists/${listId}`, {
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+        })
+        .then(res =>
+
+            (!res.ok)
+            ? res.json().then(e => Promise.reject(e))
+            : res.json()
+        )
+    },
     getNextListItems(listId) {
         return fetch(`${config.API_ENDPOINT}/nextlists/${listId}/items`, {
             headers: {
@@ -53,20 +79,6 @@ const BuyListApiService = {
             : res.json()
         )
     },
-    // getShoppingItems(listId) {
-    //     return fetch(`${config.API_ENDPOINT}/shopping/${listId}`, {
-    //         headers: {
-    //             'authorization': `bearer ${TokenService.getAuthToken()}`,
-    //         },
-    //     })
-    //     .then(res =>
-
-    //         (!res.ok)
-    //         ? res.json().then(e => Promise.reject(e))
-    //         : res.json()
-    //     )
-    // },
-    
     postBuyList(list_name, type="Now") {
         return fetch(`${config.API_ENDPOINT}/buylists`, {
         method: 'POST',
