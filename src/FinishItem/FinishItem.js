@@ -23,7 +23,7 @@ export default class FinishItem extends Component {
                     Cancel 
                   </button>
                 : <button className="btn_type_2" onClick={() => {this.context.addNext(item.id)}}>
-                    Add next 
+                    Next time 
                   </button>
                 }
             </li>

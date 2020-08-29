@@ -12,6 +12,10 @@ export default class BuyItemList extends Component {
     match: {
       params:{}
     }
+    ,
+    history: {
+      push: () => {}
+    }
   };
   state = {
       listName: '',
@@ -79,19 +83,17 @@ export default class BuyItemList extends Component {
                   <div className="Buy__list_item_delteEditGroup">
                   <button className="Buy_List_item_deleteBtn"onClick={() => this.deleteItem(item.id)}> 
                     <FontAwesomeIcon icon='trash-alt' />
-                    {/* Delete  */}
                   </button>
                   {' '}
-                  <p className="Fredoka">{item.item_name}</p>
+                  <p className="Fredoka Buy__list_itemName">{item.item_name}</p>
                   {' '}
                   <button className="Buy_List_item_editBtn" onClick={() => this.changeButtonClick(item.id)}> 
                     <FontAwesomeIcon icon='edit' />
-                    {/* Edit */}
                   </button>
                   </div>
 
                 }
-                <p className="Buy__list_item_dateCreated Lora">{format(new Date(item.date_created), "yyyy-MM-dd HH:mm:ss")}</p>
+                <p className="Buy__list_item_dateCreated Lora">{format(new Date(item.date_created), "yyyy-MM-dd")}</p>
             </li>
             
         )
@@ -130,6 +132,17 @@ export default class BuyItemList extends Component {
       selectedItemId: null,
     });
   }
+
+  goShopping = (select) => {
+    if (!this.context.items.length) {
+      alert('No item')
+    }
+    else{
+      const {listId} = this.props.match.params;
+      select === "Now" ? this.props.history.push(`/shopping/now/${listId}`) : this.props.history.push(`/shopping/next/${listId}`);
+    }
+  }
+
   render() {
     const { select ='' } = this.props;
     const ListItems = this.context.items || [];
@@ -148,7 +161,12 @@ export default class BuyItemList extends Component {
                 <ul className="Buy__ListItems">
                     {this.renderItems(ListItems, select)}
                 </ul>
-                {select === "Now" ?
+                <button className="Buy__shoppingBtn" onClick={() => {this.goShopping(select)}}>
+                  <FontAwesomeIcon className="Buy__shoppingLink__icon" icon="shopping-cart"/>
+                  {' '}
+                  <span className="Libre bold">Go Shopping</span>
+                </button>
+                {/* {select === "Now" ?
                 <p className="Buy__shoppingLink">
                     <Link to={`/shopping/now/${listId}`}>
                     <FontAwesomeIcon className="Buy__shoppingLink__icon" icon="shopping-cart"/>
@@ -164,17 +182,13 @@ export default class BuyItemList extends Component {
                         Go Shopping
                     </Link>
                 </p>
-                }
+                } */}
                 {   
                     select === "Now" && 
                     <Link className = 'AddItem__Link' to={`/addBuyItem/${listId}`}> 
                     <FontAwesomeIcon className="AddBuyList_item__icon" icon="plus"/>
                         <span>Item</span>
                     </Link>
-                  //   <Link className = 'AddBuyList__Link' to='/addbuylist'> 
-                  //   <FontAwesomeIcon className="AddBuyList__icon" icon="plus"/>
-                  //     <span>List</span>
-                  // </Link>
                 }
             </section>
             }

@@ -118,18 +118,16 @@ class CurListsPage extends Component {
           {/* faEdit, faTrashAlt */}
             <button className="Buy__list_deleteBtn" onClick={() => this.deleteList(list.id)}>
               <FontAwesomeIcon icon='trash-alt' />
-              {/* Delete  */}
             </button>
             {' '}
             <BuyList list={list} select={select}/>
             {' '}
             <button className="Buy__list_editBtn" onClick={() => this.changeButtonClick(list.id)}> 
               <FontAwesomeIcon icon='edit' />
-              {/* Edit */}
             </button>
           </div>
           }
-        <p className="Buy__list_dateCreated Lora">{format(new Date(list.date_created), "yyyy-MM-dd HH:mm:ss")}</p>
+        <p className="Buy__list_dateCreated Lora">{format(new Date(list.date_created), "yyyy-MM-dd")}</p>
       </li>
       )
   }

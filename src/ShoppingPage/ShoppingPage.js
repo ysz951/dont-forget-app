@@ -215,7 +215,7 @@ export default class Shopping extends Component {
                                 OK 
                             </button>
                             <button className="btn_type_2" onClick={() => this.addAll(uncheckItems)}>
-                                Add all to next 
+                                Add all to next time
                             </button>
                         </div>
                     </div>

@@ -45,7 +45,7 @@ export default class ShoppingItem extends Component {
             }
             {!this.state.checked && 
               <button className="btn_type_2" onClick={() => this.changeNext(item.id)}>
-                {this.state.nextTime ? 'Cancel' : "Next Time"}
+                {this.state.nextTime ? 'Cancel' : 'Next time'}
               </button>}
         </div>
     );

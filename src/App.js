@@ -76,8 +76,8 @@ class App extends Component {
       react won't know the token has been removed from local storage,
       so we need to tell React to rerender
     */
-    // this.forceUpdate();
-    this.props.history.push('/');
+    this.forceUpdate();
+    // this.props.history.push('/');
   }
   render(){
     return (
@@ -154,7 +154,3 @@ class App extends Component {
 }
 
 export default withRouter(App);
-
-function BlankPage(){
-  return <div></div>
-}
