@@ -18,13 +18,13 @@ body {
     monospace;
 } */
 
-h1, h2, h3, h4, h5, h6 a{
+h1, h2, h3, h4, h5, h6 a p{
   color: #222;
 }
 
-p {
+/* p {
   color: #555;
-}
+} */
 
 a:link{
   color: #222;
@@ -153,7 +153,11 @@ button{
   color: black;
 }
 
- .blue {
+.light-black {
+  color: #555;
+}
+
+.blue {
   color: #477ACC;
 }
 

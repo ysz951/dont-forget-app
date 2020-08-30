@@ -93,7 +93,7 @@ export default class BuyItemList extends Component {
                   </div>
 
                 }
-                <p className="Buy__list_item_dateCreated Lora">{format(new Date(item.date_created), "yyyy-MM-dd")}</p>
+                <p className="Buy__list_item_dateCreated light-black Lora">{format(new Date(item.date_created), "yyyy-MM-dd")}</p>
             </li>
             
         )

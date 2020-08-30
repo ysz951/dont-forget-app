@@ -127,7 +127,7 @@ class CurListsPage extends Component {
             </button>
           </div>
           }
-        <p className="Buy__list_dateCreated Lora">{format(new Date(list.date_created), "yyyy-MM-dd")}</p>
+        <p className="Buy__list_dateCreated light-black Lora">{format(new Date(list.date_created), "yyyy-MM-dd")}</p>
       </li>
       )
   }
