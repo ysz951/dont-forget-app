@@ -32,6 +32,7 @@
 
 .Shopping__confirm h2{
     margin: 0;
+    text-align: center;
 }
 
 .Shpping__confirm_btnGroup{
@@ -45,6 +46,42 @@
     padding-right: 5px;
     border-radius: 4px;
 }
+
+
+.Shopping__getAll{
+    position: fixed;
+    left:50%;
+    top: 20%;
+    transform: translateX(-50%);
+    /* transform: translateY(-50%); */
+    /* opacity: initial; */
+    /* transform: translate(-50%, -50%); */
+    /* -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%); */
+    background-color: rgb(209, 209, 209);
+    border: 1px solid black;
+    width: 240px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.Shopping__getAll h2{
+    margin: 0;
+    text-align: center;
+}
+
+.Shopping__getAll_btnGroup{
+    margin-top:20px;
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.Shopping__getAll_btnGroup button{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 4px;
+}
+
 
 .Shopping_Finish_btn{
     margin-left: 10px;

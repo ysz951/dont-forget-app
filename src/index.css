@@ -51,6 +51,13 @@ button{
   cursor: pointer;
 }
 
+.iconButton{
+  outline: none;
+  border: none;
+  background: none;
+}
+
+
 .btn_type_1{
   order: 1px solid #aaa;
   background-color: #eee;

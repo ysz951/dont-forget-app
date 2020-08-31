@@ -7,6 +7,14 @@ import BuyListApiService from '../services/buylist-api-service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {format} from 'date-fns';
 export default class BuyItemList extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      listName: '',
+      textAreaActive: false,
+      selectedItemId: null,
+    }
+  }
   static contextType = BuyListsContext;
   static defaultProps = {
     match: {
@@ -17,12 +25,6 @@ export default class BuyItemList extends Component {
       push: () => {}
     }
   };
-  state = {
-      listName: '',
-      textAreaActive: false,
-      selectedItemId: null,
-  }
-  
   componentDidMount(){
         const {listId} = this.props.match.params;
         this.context.clearError();
@@ -81,13 +83,13 @@ export default class BuyItemList extends Component {
                   </form>
                   :
                   <div className="Buy__list_item_delteEditGroup">
-                  <button className="Buy_List_item_deleteBtn"onClick={() => this.deleteItem(item.id)}> 
+                  <button className="Buy_List_item_deleteBtn iconButton"onClick={() => this.deleteItem(item.id)}> 
                     <FontAwesomeIcon icon='trash-alt' />
                   </button>
                   {' '}
                   <p className="Fredoka Buy__list_itemName">{item.item_name}</p>
                   {' '}
-                  <button className="Buy_List_item_editBtn" onClick={() => this.changeButtonClick(item.id)}> 
+                  <button className="Buy_List_item_editBtn iconButton" onClick={() => this.changeButtonClick(item.id)}> 
                     <FontAwesomeIcon icon='edit' />
                   </button>
                   </div>
@@ -133,13 +135,54 @@ export default class BuyItemList extends Component {
     });
   }
 
+  deleteList = (listId, newNextList) => {
+    BuyListApiService.deleteNextList(listId)
+    .then(res => {
+      this.context.deleteNextList(listId);
+      this.props.history.push(`/shopping/now/${newNextList.id}`);
+    })
+    .catch(this.context.setError)   
+  }
+
+  addBuy = (nextItems) => {
+    // const time = new Date();
+    // const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
+    // const nextName = formatTime + ' Buy';
+    const nextName = this.state.listName;
+    // console.log()
+    const {listId} = this.props.match.params;
+    BuyListApiService.postBuyList(nextName)
+        .then(res => {
+            this.context.addBuyList(res)
+            const newNextList = res;
+            console.log(newNextList)
+            Promise.all(
+                nextItems.map(item => 
+                    BuyListApiService.postItem(item.item_name, newNextList.id))
+            )
+            .then(res => {
+                this.deleteList(listId, newNextList);
+            })
+            .catch(err => this.context.setError(err.error))
+        })
+        .catch(err => this.context.setError(err.error))
+  }
+
   goShopping = (select) => {
     if (!this.context.items.length) {
       alert('No item')
     }
     else{
-      const {listId} = this.props.match.params;
-      select === "Now" ? this.props.history.push(`/shopping/now/${listId}`) : this.props.history.push(`/shopping/next/${listId}`);
+      
+      if (select === "Next") {
+        const ListItems = this.context.items || [];
+        this.addBuy(ListItems);
+      }
+      else {
+        const {listId} = this.props.match.params;
+        this.props.history.push(`/shopping/now/${listId}`)
+      }
+      // select === "Now" ? this.props.history.push(`/shopping/now/${listId}`) : this.props.history.push(`/shopping/next/${listId}`);
     }
   }
 

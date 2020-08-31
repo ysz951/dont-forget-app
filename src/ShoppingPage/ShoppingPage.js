@@ -7,6 +7,16 @@ import FinishItem from '../FinishItem/FinishItem';
 import './ShoppingPage.css';
 
 export default class Shopping extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            finishStatus: false,
+            uncheckItems: [],
+            showConfirm: false,
+            getAll: false,
+            listName: "",
+        };
+    }
     static contextType = BuyListsContext;
     static defaultProps = {
         history: {
@@ -16,13 +26,6 @@ export default class Shopping extends Component {
           params:{}
         }
     };
-    state = {
-        finishStatus: false,
-        uncheckItems: [],
-        showConfirm: false,
-        getAll: false,
-        listName: "",
-    }
     
     showConfirmFunc = () => {
         this.setState({showConfirm: true});
@@ -68,7 +71,7 @@ export default class Shopping extends Component {
     }
 
     onUnload(event) { 
-        alert('page Refreshed');
+        alert('Page Refreshed');
     }
     componentDidMount(){
         window.addEventListener("beforeunload", this.onUnload)
@@ -115,9 +118,9 @@ export default class Shopping extends Component {
     }
     addNext = (uncheckItems) => {
         const nextItems = uncheckItems.filter(item => this.context.nextSet.has(item.id));
-        const time = new Date();
-        const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
-        const nextName = formatTime + ' Next';
+        // const time = new Date();
+        // const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
+        const nextName = this.state.listName + ' Next';
         if (nextItems.length) {
             BuyListApiService.postNextList(nextName, 'Next')
                 .then(res => {
@@ -148,9 +151,9 @@ export default class Shopping extends Component {
     }
     addAll = (uncheckItems) => {
         const nextItems = uncheckItems;
-        const time = new Date();
-        const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
-        const nextName = formatTime + ' Next'
+        // const time = new Date();
+        // const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
+        const nextName = this.state.listName + ' Next';
         BuyListApiService.postNextList(nextName, 'Next')
             .then(res => {
                 this.context.addNextList(res)
@@ -214,16 +217,22 @@ export default class Shopping extends Component {
                             <button className="btn_type_2" onClick={() => this.addNext(uncheckItems)}> 
                                 OK 
                             </button>
-                            <button className="btn_type_2" onClick={() => this.addAll(uncheckItems)}>
+                            <button className="btn_type_2 red" onClick={() => this.addAll(uncheckItems)}>
                                 Add all to next time
                             </button>
                         </div>
                     </div>
                 :
-                <div>
-                    <p>Get everything</p>
-                    <button onClick={() => this.addNext([])}>OK </button>
-                    <button onClick={() => this.deleteList(listId)}>Delete This List? </button>
+                <div className="Shopping__getAll">
+                    <h2>Get everything</h2>
+                    <div className="Shopping__getAll_btnGroup">
+                        <button className="btn_type_2" onClick={() => this.addNext([])}>
+                            OK 
+                        </button>
+                        <button className="btn_type_2 red" onClick={() => this.deleteList(listId)}>
+                            Delete this list 
+                        </button>
+                    </div>
                 </div>
                 }
                 </section>

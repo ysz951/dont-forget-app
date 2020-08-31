@@ -18,7 +18,7 @@ export default class AddList extends Component {
     const {list_name} = ev.target;
     const type = this.props.select;
     this.context.clearError();
-    BuyListApiService.postBuyList(list_name.value, type)
+    BuyListApiService.postBuyList(list_name.value)
         .then(this.context.addBuyList)
         .then(() => {
             list_name.value = '';

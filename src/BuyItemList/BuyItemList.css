@@ -67,12 +67,6 @@
     align-items: center;
 }
 
-.Buy_List_item button{
-    outline: none;
-    border: none;
-    background: none;
-}
-
 .Buy_List_item_deleteBtn{
     visibility: hidden;
 }
@@ -99,6 +93,10 @@
 .Buy__list_item_updateBtnGroup{
     display: flex;
     justify-content: flex-end;
+}
+
+.Buy__list_item_updateBtnGroup button:last-child{
+    margin-left: 10px;
 }
 
 .Buy__list_item_dateCreated{

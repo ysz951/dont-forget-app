@@ -42,11 +42,6 @@
     align-items: center;
 }
 
-.Buy__list button{
-    outline: none;
-    border: none;
-    background: none;
-}
 .Buy__list_deleteBtn{
     visibility: hidden;
 }
@@ -81,6 +76,10 @@
 .Buy__list_updateBtnGroup{
     display: flex;
     justify-content: flex-end;
+}
+
+.Buy__list_updateBtnGroup button:last-child{
+    margin-left: 10px;
 }
 
 

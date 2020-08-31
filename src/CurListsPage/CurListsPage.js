@@ -116,13 +116,13 @@ class CurListsPage extends Component {
           :
           <div className="Buy__list_delteEditGroup">
           {/* faEdit, faTrashAlt */}
-            <button className="Buy__list_deleteBtn" onClick={() => this.deleteList(list.id)}>
+            <button className="Buy__list_deleteBtn iconButton" onClick={() => this.deleteList(list.id)}>
               <FontAwesomeIcon icon='trash-alt' />
             </button>
             {' '}
             <BuyList list={list} select={select}/>
             {' '}
-            <button className="Buy__list_editBtn" onClick={() => this.changeButtonClick(list.id)}> 
+            <button className="Buy__list_editBtn iconButton" onClick={() => this.changeButtonClick(list.id)}> 
               <FontAwesomeIcon icon='edit' />
             </button>
           </div>

@@ -79,7 +79,7 @@ const BuyListApiService = {
             : res.json()
         )
     },
-    postBuyList(list_name, type="Now") {
+    postBuyList(list_name) {
         return fetch(`${config.API_ENDPOINT}/buylists`, {
         method: 'POST',
         headers: {
@@ -97,7 +97,7 @@ const BuyListApiService = {
             : res.json()
         )
     },
-    postNextList(list_name, type="Next") {
+    postNextList(list_name) {
         return fetch(`${config.API_ENDPOINT}/nextlists`, {
         method: 'POST',
         headers: {

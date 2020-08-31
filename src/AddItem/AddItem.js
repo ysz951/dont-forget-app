@@ -75,7 +75,7 @@ export default class AddItem extends Component {
                     </button>
                     {' '}
                     <button className="AddItem__itemName_Btn btn_type_2" type='submit'>
-                      Ok
+                      OK
                     </button>
                 </form>
             </div>}
