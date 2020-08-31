@@ -1,4 +1,4 @@
-.LandingPage_image_group {
+.LandingPage {
     position: fixed;
     width: 100%;
     left: 50%;
@@ -6,19 +6,26 @@
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     transform: translateX(-50%);
-    /* height:calc(100vh - 50px); */
-    /* background-color: rgb(233, 233, 233); */
-    
+}
+
+.LandingPage_image_group {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: rgb(233, 233, 233);
+    height: 100vh;
+    display:flex;
+    justify-content: flex-end;
 }
 
 .LandingPage_image{
-    max-width: 900px;
-    margin: 0 auto;
+    
     opacity: 0.3;
-    height: calc(100vh - 50px);
+    width: 200px;
+    height: 200px;
     background: url("https://dontforget-upload.s3.us-east-2.amazonaws.com/dont+forget+bubble.jpg");
     background-size: cover;
-    background-position: 50% 50%;
+    background-position: 30% 50%;
+    margin-right: 50px;
 }
 
 
@@ -28,14 +35,12 @@
     left: 50%;
     top: 25vh;
     height: 100vh;
-    /* top: 5vh; */
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     transform: translateX(-50%);
 }
 
 .LandingPage_text_group p{
-    /* opacity: 1; */
     margin-top: 0;
     margin-bottom: 5vh;
     text-align: center;
@@ -63,7 +68,6 @@
 }
 
 .LandingPage_findMore{
-    /* margin:0 auto; */
     text-align: center;
 }
 
@@ -91,4 +95,14 @@
         font-size: xx-large;
     }
 
+}
+
+@media screen and (min-width: 750px) {
+
+    .LandingPage_image{
+        width: 250px;
+        height: 250px;
+        background-position: 30% 50%;
+        margin-right: 30px;
+    }
 }
