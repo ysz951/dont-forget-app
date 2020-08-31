@@ -153,7 +153,6 @@ export default class BuyItemList extends Component {
         .then(res => {
             this.context.addBuyList(res)
             const newNextList = res;
-            console.log(newNextList)
             Promise.all(
                 nextItems.map(item => 
                     BuyListApiService.postItem(item.item_name, newNextList.id))
