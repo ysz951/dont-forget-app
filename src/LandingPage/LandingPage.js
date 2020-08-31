@@ -9,18 +9,29 @@ function LandingPage(props){
             </div>
             <div className="LandingPage_text_group">
                 
-                <h2>
+                <h1>
                     <span className="Lustria">
                         Dont forget what you want !
                     </span>
-                </h2>
-                
-                <p>Build a Buy List</p>
-                <p>Check the items of list during shopping</p>
-                <p>Add the out of store items in Next Time List</p>
+                </h1>
+                {/* Create your Shopping List
+
+As you find the items in the store, mark them as Done
+
+If you're not able to find an item, mark it as Next Time */}
+                <p className="Lora bold">Create your 
+                    <span className="brown"> To Buy List</span>
+                </p>
+                <p className="Lora bold">
+                    As you find the items in the store, mark them as 
+                    <span className="brown"> Done</span>
+                </p>
+                <p className="Lora bold">If you're not able to find an item, mark it as 
+                    <span className="brown"> Next Time</span>
+                </p>
                 <p className="LandingPage_findMore Fredoka">
                     <Link to='/login'>
-                        Find More
+                        Log in
                     </Link>
                 </p>
             </div>

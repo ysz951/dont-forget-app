@@ -78,7 +78,7 @@ button{
 .btn_type_2{
   order: none;
   background-color: rgb(255, 255, 255);
-  color: rgb(100, 100, 100);
+  color: rgb(43, 43, 43);
   border-radius: 2px;
   padding: 3px;
 }
@@ -93,7 +93,7 @@ button{
   background-color: rgb(43, 69, 92);
   border-color:rgb(67, 103, 133);
   /* color: rgb(247, 247, 247); */
-  color: rgb(100, 100, 100);
+  color: rgb(173, 173, 173);
   border-radius: 2px;
   padding: 3px;
 }

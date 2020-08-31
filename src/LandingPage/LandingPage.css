@@ -1,3 +1,25 @@
+.LandingPage_image_group {
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    height: 100vh;
+    top: 50px;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+    
+}
+
+.LandingPage_image{
+    max-width: 900px;
+    margin: 0 auto;
+    opacity: 0.1;
+    height: calc(98vh - 50px);
+    background: url("https://dontforget-upload.s3.us-east-2.amazonaws.com/dont+forget+bubble.jpg");
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
 
 .LandingPage_text_group{
     position: fixed;
@@ -16,13 +38,14 @@
     margin-top: 0;
     margin-bottom: 5vh;
     text-align: center;
+    font-size: smaller;
 }
 
-.LandingPage_text_group h2{
-    /* opacity: 1; */
+.LandingPage_text_group h1{
     margin-top: 0;
     margin-bottom: 10vh;
     text-align: center;
+    font-size:x-large;
 }
 
 
@@ -54,4 +77,19 @@
 .LandingPage_findMore a:hover{
     color: rgb(230, 196, 173);
     background-color: #222;
+}
+
+@media screen and (min-width: 400px) {
+    .LandingPage_text_group p{
+        font-size: initial
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .LandingPage_text_group h1{
+        font-size: xx-large;
+    }
+
+    
+
 }
