@@ -1,5 +1,6 @@
 .Shopping_section{
     padding-top: 50px;
+    min-height: 98vh;
 }
 
 .Shopping_section h2, h3{
@@ -53,11 +54,6 @@
     left:50%;
     top: 20%;
     transform: translateX(-50%);
-    /* transform: translateY(-50%); */
-    /* opacity: initial; */
-    /* transform: translate(-50%, -50%); */
-    /* -moz-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%); */
     background-color: rgb(209, 209, 209);
     border: 1px solid black;
     width: 240px;

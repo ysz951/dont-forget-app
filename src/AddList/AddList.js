@@ -16,16 +16,16 @@ export default class AddList extends Component {
   handleSubmit = ev => {
     ev.preventDefault();
     const {list_name} = ev.target;
-    const type = this.props.select;
     this.context.clearError();
+    // post buy list to back end
     BuyListApiService.postBuyList(list_name.value)
-        .then(this.context.addBuyList)
-        .then(() => {
-            list_name.value = '';
-            this.props.history.goBack();
+        .then(res => {
+          // add new list to context
+          this.context.addBuyList(res);
+          this.props.history.goBack();
         })
         .catch(err => this.context.setError(err.error))
-    }
+  }
   render() {
 
     const { select =''} = this.props;

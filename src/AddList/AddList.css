@@ -1,5 +1,6 @@
 .AddList{
     padding-top: 120px;
+    min-height: 98vh;
 }
 .AddList h2{
     text-align: center;

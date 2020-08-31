@@ -29,12 +29,12 @@ export default class BuyItemList extends Component {
         const {listId} = this.props.match.params;
         this.context.clearError();
         const { select ='' } = this.props;
+        // get selected list items based on 'select' 
         if (select === 'Now'){
             BuyListApiService.getBuyListItems(listId)
             .then(res => {
                 this.context.setItems(res.listItems);
                 this.setState({listName: res.listName});
-                // this.context.setSelectedBuyList(res.listItems)
             })
             .catch(err => this.context.setError(err.error))
         }
@@ -43,13 +43,13 @@ export default class BuyItemList extends Component {
             .then(res => {
                 this.context.setItems(res.listItems);
                 this.setState({listName: res.listName});
-                // this.context.setSelectedBuyList(res.listItems)
             })
             .catch(err => this.context.setError(err.error))
         }
         
   }
   componentWillUnmount() {
+    // clear items
     this.context.clearItems();
   }
   renderItems(ListItems, select) {
@@ -93,7 +93,6 @@ export default class BuyItemList extends Component {
                     <FontAwesomeIcon icon='edit' />
                   </button>
                   </div>
-
                 }
                 <p className="Buy__list_item_dateCreated light-black Lora">{format(new Date(item.date_created), "yyyy-MM-dd")}</p>
             </li>
@@ -105,6 +104,7 @@ export default class BuyItemList extends Component {
     ev.preventDefault();
     const {updateItem} = ev.target;
     const {listId} = this.props.match.params;
+    // update item name
     BuyListApiService.updateItem(this.state.selectedItemId, updateItem.value, listId)
       .then(res => {
         this.context.updateItem(this.state.selectedItemId, updateItem.value)
@@ -116,6 +116,7 @@ export default class BuyItemList extends Component {
       .catch(this.context.setError)
   }
   deleteItem = (itemId) => {
+    // delete item
     BuyListApiService.deleteItem(itemId)
       .then(res => {
         this.context.deleteItem(itemId);
@@ -136,6 +137,7 @@ export default class BuyItemList extends Component {
   }
 
   deleteList = (listId, newNextList) => {
+    // delte list 
     BuyListApiService.deleteNextList(listId)
     .then(res => {
       this.context.deleteNextList(listId);
@@ -145,11 +147,7 @@ export default class BuyItemList extends Component {
   }
 
   addBuy = (nextItems) => {
-    // const time = new Date();
-    // const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
-    // const nextName = formatTime + ' Buy';
     const nextName = this.state.listName;
-    // console.log()
     const {listId} = this.props.match.params;
     BuyListApiService.postBuyList(nextName)
         .then(res => {

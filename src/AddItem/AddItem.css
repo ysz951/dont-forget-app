@@ -1,5 +1,6 @@
 .AddItem{
     padding-top: 120px;
+    min-height: 98vh;
 }
 
 .AddItem h2{

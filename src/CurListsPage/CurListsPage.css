@@ -1,4 +1,9 @@
 
+.Buy__Lists_section{
+    min-height: 98vh;
+    padding-top: 75px;
+}
+
 .AddBuyList__Link {
     position: fixed;
     bottom: 5vh;
@@ -17,12 +22,6 @@
 
 .AddBuyList__icon{
     font-size: large;
-}
-
-.Buy__Lists_section {
-    padding-top: 73px;
-    /* background-color: rgb(217, 217, 217); */
-    /* min-height: 100vh; */
 }
 
 .Buy__Lists{

@@ -13,34 +13,21 @@ export default class AddItem extends Component {
         params:{}
     }
   };
-
-  componentDidMount(){
-    const {listId} = this.props.match.params;
-    this.context.clearError();
-    const { select ='' } = this.props;
-    if (select === 'Now') {
-        BuyListApiService.getBuyListById(listId)
-        .catch(err => this.context.setError(err.error))
-    }
-    else {
-        BuyListApiService.getNextListById(listId)
-        .catch(err => this.context.setError(err.error))
-    }
- }
     
-
   handleSubmit = ev => {
     ev.preventDefault();
     const {item_name} = ev.target;
     const {listId} = this.props.match.params;
     this.context.clearError();
+    // post item to back end
     BuyListApiService.postItem(item_name.value, listId)
         .then(res => {
+            // add new item to context
             this.context.addItem(res)
             this.props.history.goBack();
         })
         .catch(err => this.context.setError(err.error))
-    }
+  }
   render() {
 
     const { select ='' } = this.props;

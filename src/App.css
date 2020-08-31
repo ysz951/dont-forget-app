@@ -1,10 +1,8 @@
 .App {
-  /* padding-top: 10px; */
-  /* padding-bottom: 20px; */
+  padding: 0;
   max-width: 900px;
   background-color: white;
   margin: 0 auto;
-  /* min-height: 100vh; */
 }
 
 .App__header {
@@ -17,11 +15,7 @@
 
 .App__main {
   width: 100%;
-  /* margin: 0; */
-  min-height: calc( 99vh - 10px);
-  /* padding-left: 10px;
-  padding-right: 10px; */
-  /* border: 0.5px solid gray; */
+  /* min-height: 100vh; */
   background-color: rgb(233, 233, 233);
 }
 

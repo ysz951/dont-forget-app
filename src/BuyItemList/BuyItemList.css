@@ -16,6 +16,7 @@
 
 .Buy__Items_section{
     padding-top: 87px;
+    min-height: 98vh;
 }
 
 .Buy__Items_section h2{
@@ -56,10 +57,7 @@
 
 .Buy_List_item {
     margin: 10px 0;
-    /* display: flex;
-    align-items: center; */
     border-bottom: 1px solid rgb(192, 192, 192);
-    /* justify-content: center; */
 }
 
 .Buy__list_item_delteEditGroup{

@@ -129,11 +129,6 @@ class App extends Component {
               select="Now"
             />
             <PrivateRoute
-              path={'/shopping/next/:listId'}
-              component={ShoppingPage}
-              select="Next"
-            />
-            <PrivateRoute
               path={'/addbuylist'}
               component={AddList}
               select="Now"

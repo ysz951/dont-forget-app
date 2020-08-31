@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import BuyListsContext from '../context/BuyListsContext';
-import {format} from 'date-fns';
 import ShoppingItem from '../ShoppingItem/ShoppingItem';
 import BuyListApiService from '../services/buylist-api-service';
 import FinishItem from '../FinishItem/FinishItem';
@@ -34,6 +33,8 @@ export default class Shopping extends Component {
     finishShopping = () => {
         const ListItems = this.context.selectedBuyList || [];
         const uncheckItems = ListItems.filter(item => !this.context.checkSet.has(item.id));
+        // When click "Finish" button, if all item is checked, set "getAll" state to be true
+        // Otherwise, set "uncheckItems" and change "finishStatus" to be true
         if (uncheckItems.length) {
             this.setState({
                 finishStatus:true,
@@ -44,13 +45,11 @@ export default class Shopping extends Component {
             this.setState({
                 getAll: true,
             });
-            // setTimeout(function(){ 
-            //     this.props.history.push('/buyLists');
-            //  }.bind(this), 1500);
         }
     }
     deleteList = (listId) => {
         const { select ='' } = this.props;
+        // deleteList based on select
         if (select === "Now"){
           BuyListApiService.deleteBuyList(listId)
           .then(res => {
@@ -118,14 +117,15 @@ export default class Shopping extends Component {
     }
     addNext = (uncheckItems) => {
         const nextItems = uncheckItems.filter(item => this.context.nextSet.has(item.id));
-        // const time = new Date();
-        // const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
         const nextName = this.state.listName + ' Next';
+        // add all uncheckItems to next list
         if (nextItems.length) {
+            // firstly, post a new newNextList
             BuyListApiService.postNextList(nextName, 'Next')
                 .then(res => {
                     this.context.addNextList(res)
                     const newNextList = res;
+                    // insert all uncheckItems to newNextList
                     Promise.all(
                         nextItems.map(item => 
                             BuyListApiService.postItem(item.item_name, newNextList.id))
@@ -134,25 +134,18 @@ export default class Shopping extends Component {
                         this.props.history.push('/nextLists');
                     })
                     .catch(err => this.context.setError(err.error))
-                    // for (let item of nextItems) {
-                    //     BuyListApiService.postItem(item.item_name, newNextList.id)
-                    //         .then(() => {
-                    //             this.props.history.push('/nextLists');
-                    //         })
-                    //         .catch(err => this.context.setError(err.error))
-                    // }
                 })
                 .catch(err => this.context.setError(err.error))
             
         }
         else {
+            // if no item is added to next list, go back to buylist page
             this.props.history.push('/buyLists');
         }
     }
     addAll = (uncheckItems) => {
+        // automatically add all uncheckItems to new nextlist
         const nextItems = uncheckItems;
-        // const time = new Date();
-        // const formatTime = format(new Date(time), "yyyy-MM-dd HH:mm:ss");
         const nextName = this.state.listName + ' Next';
         BuyListApiService.postNextList(nextName, 'Next')
             .then(res => {
@@ -186,20 +179,20 @@ export default class Shopping extends Component {
                 {!this.state.getAll ? 
                     !this.state.finishStatus ? 
                     <div>       
-                        {this.state.showConfirm && (
-                            <div className="Shopping__confirm">
-                                <h2>Are you sure? </h2>
-                                <div className="Shpping__confirm_btnGroup">
-                                    <button className="btn_type_2" 
-                                    onClick={() => this.setState({showConfirm:false})}>
-                                        No
-                                    </button>
-                                    <button className="btn_type_2" onClick={() => this.finishShopping()}>
-                                        Yes
-                                    </button>
-                                </div>
+                        {this.state.showConfirm && 
+                        <div className="Shopping__confirm">
+                            <h2>Are you sure? </h2>
+                            <div className="Shpping__confirm_btnGroup">
+                                <button className="btn_type_2" 
+                                onClick={() => this.setState({showConfirm:false})}>
+                                    No
+                                </button>
+                                <button className="btn_type_2" onClick={() => this.finishShopping()}>
+                                    Yes
+                                </button>
                             </div>
-                        )}
+                        </div>
+                        }
                         <ul className="Shopping__list">
                             {this.renderItems(ListItems)}
                         </ul>
